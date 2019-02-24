@@ -1,9 +1,9 @@
 # prettify-python-plugin
 Intellij IDE plugin
 
-##Features:
+## Features:
 
-###Folding
+### Folding
 
 ">=" to "≥"
 
