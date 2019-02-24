@@ -1,0 +1,23 @@
+<idea-plugin>
+  <id>ru.meanmail.plugins.pretty-python</id>
+  <name>Prettify python</name>
+  <version>1.0</version>
+  <vendor email="plugin@meanmail.ru" url="https://github.com/meanmail">meanmail</vendor>
+
+  <description><![CDATA[
+      Prettify your python
+    ]]></description>
+
+  <change-notes><![CDATA[
+      First release
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="183.5429"/>
+
+  <depends>com.intellij.modules.lang</depends>
+  <depends optional="true" config-file="config.xml">PythonCore</depends>
+  <depends optional="true" config-file="config.xml">Pythonid</depends>
+
+</idea-plugin>
