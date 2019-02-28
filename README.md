@@ -12,3 +12,5 @@ Intellij IDE plugin
 "!=" to "≠"
 
 "->" to "➔"
+
+"lambda" to "λ"

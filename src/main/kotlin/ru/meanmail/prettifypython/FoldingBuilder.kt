@@ -5,7 +5,6 @@ import com.intellij.lang.folding.FoldingBuilder
 import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.util.TextRange
-import com.intellij.psi.PsiElement
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import java.util.regex.Pattern
 
@@ -20,7 +19,8 @@ class PrettifyFoldingBuilder : FoldingBuilder {
             ">=" to "≥",
             "<=" to "≤",
             "!=" to "≠",
-            "->" to "➔"
+            "->" to "➔",
+            "lambda" to "λ"
     )
     
     private val symbolPattern = Pattern.compile(

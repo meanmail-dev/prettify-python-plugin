@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.api.tasks.wrapper.Wrapper
 
 plugins {
     java
@@ -8,7 +7,7 @@ plugins {
 }
 
 group = "ru.meanmail"
-version = "0.1"
+version = "2019.2"
 
 repositories {
     mavenCentral()
