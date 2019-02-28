@@ -1,15 +1,25 @@
 <idea-plugin>
   <id>ru.meanmail.plugins.prettify-python</id>
-  <name>Prettify python</name>
+  <name>Prettify Python</name>
   <version>1.0</version>
   <vendor email="plugin@meanmail.ru" url="https://github.com/meanmail">meanmail</vendor>
 
   <description><![CDATA[
-      Prettify your python
+      Prettify your Python
     ]]></description>
 
   <change-notes><![CDATA[
-      First release
+      <p>
+      <b>Feb 28, 2019 v2019.2</b>
+      <br>
+          + lambda
+      </p>
+      <br>
+      <p>
+      <b>Feb 24, 2019 v0.1</b>
+      <br>
+          First release
+      </p>
     ]]>
   </change-notes>
 
