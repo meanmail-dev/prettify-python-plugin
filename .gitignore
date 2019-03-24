@@ -100,3 +100,4 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 /.sandbox/
+!/gradle/wrapper/gradle-wrapper.jar
