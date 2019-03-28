@@ -5,10 +5,15 @@
   <vendor email="plugin@meanmail.ru" url="https://github.com/meanmail">meanmail</vendor>
 
   <description><![CDATA[
-      Prettify your Python
+      Prettify your Python!
     ]]></description>
 
   <change-notes><![CDATA[
+      <b>Mar 249, 2019 2019.2.1</b>
+      <br>
+          Update IDE build
+      </p>
+      <br>
       <p>
       <b>Feb 28, 2019 v2019.2</b>
       <br>
