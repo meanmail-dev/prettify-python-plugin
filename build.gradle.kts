@@ -33,7 +33,7 @@ tasks.withType<Wrapper> {
 
 intellij {
     pluginName = "Prettify python"
-    version = "2019.1"
+    version = "2019.2"
     setPlugins("PythonCore:2019.1.191.6183.53")
 }
 
@@ -62,7 +62,7 @@ fun readChangeNotes(pathname: String): String {
             postfix = "</p><br>") {
         it.joinToString("<br>")
     } + "See the full change notes on the " +
-            "<a href='https://github.com/meanmail/prettify-python-plugin'> github</a>"
+            "<a href='https://github.com/meanmail/prettify-python-plugin'>github</a>"
 }
 
 tasks.withType<PatchPluginXmlTask> {
