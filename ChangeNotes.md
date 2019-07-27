@@ -1,6 +1,10 @@
-## 2019.2.1 (Mar 249, 2019)
+## 2019.2.2 (July 28, 2019)
 
-Update IDE build
+* Update IDE build
+
+## 2019.2.1 (Mar 29, 2019)
+
+* Update IDE build
 
 ## 2019.2 (Feb 28, 2019)
 
