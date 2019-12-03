@@ -10,11 +10,11 @@ import java.util.regex.Pattern
 
 
 class PrettifyFoldingBuilder : FoldingBuilder {
-    
+
     private val stringLiteralPattern = Pattern.compile(
             "\".*?\""
     )
-    
+
     private val prettySymbolMaps = hashMapOf(
             ">=" to "≥",
             "<=" to "≤",
@@ -22,15 +22,15 @@ class PrettifyFoldingBuilder : FoldingBuilder {
             "->" to "➔",
             "lambda" to "λ"
     )
-    
+
     private val symbolPattern = Pattern.compile(
-            getPatter()
+            getPattern()
     )
-    
-    private fun getPatter(): String {
+
+    private fun getPattern(): String {
         return prettySymbolMaps.keys.joinToString(separator = "|")
     }
-    
+
     private val isSymbolInStringLiteral = { text: String, rangeStart: Int, rangeEnd: Int ->
         val matcher = stringLiteralPattern.matcher(text.replace("\n", " "))
         var isInStringLiteral = false
@@ -40,10 +40,10 @@ class PrettifyFoldingBuilder : FoldingBuilder {
         }
         isInStringLiteral
     }
-    
+
     private fun getDescriptors(node: ASTNode): List<FoldingDescriptor> {
         val descriptors = mutableListOf<FoldingDescriptor>()
-        
+
         if (node is LeafPsiElement) {
             val text = node.text
             val matcher = symbolPattern.matcher(text)
@@ -51,7 +51,7 @@ class PrettifyFoldingBuilder : FoldingBuilder {
                 val nodeRange = node.textRange
                 val rangeStart = nodeRange.startOffset
                 val rangeEnd = nodeRange.endOffset
-                
+
                 if (!(isSymbolInStringLiteral(text, rangeStart, rangeEnd))) {
                     val pretty = prettySymbolMaps[text] ?: return listOf()
                     val range = TextRange.create(rangeStart, rangeEnd)
@@ -62,15 +62,15 @@ class PrettifyFoldingBuilder : FoldingBuilder {
         } else for (child in node.getChildren(null)) {
             descriptors.addAll(getDescriptors(child))
         }
-        
+
         return descriptors
     }
-    
+
     override fun buildFoldRegions(node: ASTNode, document: Document): Array<out FoldingDescriptor> {
         return getDescriptors(node).toTypedArray()
     }
-    
+
     override fun getPlaceholderText(node: ASTNode) = null
-    
+
     override fun isCollapsedByDefault(node: ASTNode) = true
 }

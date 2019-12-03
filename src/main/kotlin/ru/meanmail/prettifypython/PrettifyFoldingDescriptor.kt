@@ -10,9 +10,7 @@ class PrettifyFoldingDescriptor(node: PsiElement,
                                 group: FoldingGroup?,
                                 private val name: String,
                                 private val notExpandable: Boolean) :
-        FoldingDescriptor(node.node, range, group) {
-    
-    override fun getPlaceholderText() = name
-    
+        FoldingDescriptor(node.node, range, group, name) {
+
     override fun isNonExpandable() = notExpandable
 }
