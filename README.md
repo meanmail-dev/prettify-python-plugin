@@ -1,6 +1,8 @@
 # prettify-python-plugin
 Intellij IDE plugin
 
+https://meanmail.dev/plugin/2
+
 ## Features:
 
 ### Folding
