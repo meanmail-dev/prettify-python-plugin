@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement
 class PrettifyFoldingDescriptor(node: PsiElement,
                                 range: TextRange,
                                 group: FoldingGroup?,
-                                private val name: String,
+                                name: String,
                                 private val notExpandable: Boolean) :
         FoldingDescriptor(node.node, range, group, name) {
 

@@ -6,14 +6,11 @@ import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.impl.source.tree.LeafPsiElement
+import com.jetbrains.python.psi.PyStringElement
 import java.util.regex.Pattern
 
 
 class PrettifyFoldingBuilder : FoldingBuilder {
-
-    private val stringLiteralPattern = Pattern.compile(
-            "\".*?\""
-    )
 
     private val prettySymbolMaps = hashMapOf(
             ">=" to "≥",
@@ -23,44 +20,43 @@ class PrettifyFoldingBuilder : FoldingBuilder {
             "lambda" to "λ"
     )
 
-    private val symbolPattern = Pattern.compile(
-            getPattern()
-    )
+    private val symbolPattern = Pattern.compile(getPattern())
 
     private fun getPattern(): String {
         return prettySymbolMaps.keys.joinToString(separator = "|")
     }
 
-    private val isSymbolInStringLiteral = { text: String, rangeStart: Int, rangeEnd: Int ->
-        val matcher = stringLiteralPattern.matcher(text.replace("\n", " "))
-        var isInStringLiteral = false
-        while (matcher.find()) {
-            isInStringLiteral = matcher.start() <= rangeStart && rangeEnd <= matcher.end()
-            if (isInStringLiteral) break
+    private fun getDescriptorsForChildren(node: ASTNode): List<FoldingDescriptor> {
+        val descriptors = mutableListOf<FoldingDescriptor>()
+
+        for (child in node.getChildren(null)) {
+            descriptors.addAll(getDescriptors(child))
         }
-        isInStringLiteral
+
+        return descriptors
     }
 
     private fun getDescriptors(node: ASTNode): List<FoldingDescriptor> {
+        if (node !is LeafPsiElement) {
+            return getDescriptorsForChildren(node)
+        }
+
+        if (node.psi is PyStringElement) {
+            return emptyList()
+        }
+
         val descriptors = mutableListOf<FoldingDescriptor>()
+        val text = node.text
+        val matcher = symbolPattern.matcher(text)
 
-        if (node is LeafPsiElement) {
-            val text = node.text
-            val matcher = symbolPattern.matcher(text)
-            while (matcher.find()) {
-                val nodeRange = node.textRange
-                val rangeStart = nodeRange.startOffset
-                val rangeEnd = nodeRange.endOffset
-
-                if (!(isSymbolInStringLiteral(text, rangeStart, rangeEnd))) {
-                    val pretty = prettySymbolMaps[text] ?: return listOf()
-                    val range = TextRange.create(rangeStart, rangeEnd)
-                    descriptors.add(PrettifyFoldingDescriptor(node, range, null,
-                            pretty, true))
-                }
-            }
-        } else for (child in node.getChildren(null)) {
-            descriptors.addAll(getDescriptors(child))
+        if (matcher.find()) {
+            val nodeRange = node.textRange
+            val rangeStart = nodeRange.startOffset
+            val rangeEnd = nodeRange.endOffset
+            val pretty = prettySymbolMaps[text] ?: return listOf()
+            val range = TextRange.create(rangeStart, rangeEnd)
+            descriptors.add(PrettifyFoldingDescriptor(node, range, null,
+                    pretty, true))
         }
 
         return descriptors
@@ -70,7 +66,7 @@ class PrettifyFoldingBuilder : FoldingBuilder {
         return getDescriptors(node).toTypedArray()
     }
 
-    override fun getPlaceholderText(node: ASTNode) = null
+    override fun getPlaceholderText(node: ASTNode): String? = null
 
     override fun isCollapsedByDefault(node: ASTNode) = true
 }
