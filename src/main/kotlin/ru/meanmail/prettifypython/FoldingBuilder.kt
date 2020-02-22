@@ -7,7 +7,6 @@ import com.intellij.openapi.editor.Document
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.jetbrains.python.psi.PyStringElement
-import java.util.regex.Pattern
 
 
 class PrettifyFoldingBuilder : FoldingBuilder {
@@ -17,14 +16,9 @@ class PrettifyFoldingBuilder : FoldingBuilder {
             "<=" to "≤",
             "!=" to "≠",
             "->" to "➔",
-            "lambda" to "λ"
+            "lambda" to "λ",
+            "**" to "^"
     )
-
-    private val symbolPattern = Pattern.compile(getPattern())
-
-    private fun getPattern(): String {
-        return prettySymbolMaps.keys.joinToString(separator = "|")
-    }
 
     private fun getDescriptorsForChildren(node: ASTNode): List<FoldingDescriptor> {
         val descriptors = mutableListOf<FoldingDescriptor>()
@@ -47,16 +41,15 @@ class PrettifyFoldingBuilder : FoldingBuilder {
 
         val descriptors = mutableListOf<FoldingDescriptor>()
         val text = node.text
-        val matcher = symbolPattern.matcher(text)
 
-        if (matcher.find()) {
-            val nodeRange = node.textRange
-            val rangeStart = nodeRange.startOffset
-            val rangeEnd = nodeRange.endOffset
-            val pretty = prettySymbolMaps[text] ?: return listOf()
-            val range = TextRange.create(rangeStart, rangeEnd)
-            descriptors.add(PrettifyFoldingDescriptor(node, range, null,
-                    pretty, true))
+        for (entity in prettySymbolMaps.entries) {
+            if (entity.key == text) {
+                val nodeRange = node.textRange
+                val range = TextRange.create(nodeRange.startOffset,
+                        nodeRange.endOffset)
+                descriptors.add(PrettifyFoldingDescriptor(node, range, null,
+                        entity.value, true))
+            }
         }
 
         return descriptors
