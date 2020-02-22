@@ -60,17 +60,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: unzipped.com.jetbrains.plugins:PythonCore:unzipped.com.jetbrains.plugins:201.5616.29">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/libthrift-0.11.0.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/python-ce.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/completion-ranking-python-0.0.11.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
       <library name="Gradle: com.jetbrains:ideaIC:LATEST-EAP-SNAPSHOT">
         <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/LATEST-EAP-SNAPSHOT/3c643d17ff30f9f949d478a8d6b0af2b63c2c6b/ideaIC-LATEST-EAP-SNAPSHOT/lib/FastInfoset-1.2.15.jar!/" />
@@ -302,6 +291,17 @@
         <SOURCES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/LATEST-EAP-SNAPSHOT/eb5ea096d46acada838ed2268c5fc2a68d581e00/ideaIC-LATEST-EAP-SNAPSHOT-sources.jar!/" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: unzipped.com.jetbrains.plugins:PythonCore:unzipped.com.jetbrains.plugins:201.5616.29">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/libthrift-0.11.0.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/python-ce.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/completion-ranking-python-0.0.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>

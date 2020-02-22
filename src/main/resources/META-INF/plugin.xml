@@ -2,14 +2,14 @@
     <id>ru.meanmail.plugins.prettify-python</id>
     <name>Prettify Python</name>
     <version>1.0</version>
-    <vendor email="plugin@meanmail.ru" url="https://github.com/meanmail">meanmail</vendor>
+    <vendor email="plugin@meanmail.ru" url="https://meanmail.dev/plugin/2">meanmail</vendor>
 
     <description></description>
 
     <change-notes></change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="183.5429"/>
+    <idea-version since-build="191"/>
 
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="python-config.xml">com.intellij.modules.python</depends>
