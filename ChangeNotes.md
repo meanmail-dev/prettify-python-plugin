@@ -1,3 +1,7 @@
+## 2020.1 (February, 23, 2020)
+
++ Folding ** to ^
+
 ## 2019.2.3 (December, 04, 2019)
            
 * Version for Intellij 2019.3.*
