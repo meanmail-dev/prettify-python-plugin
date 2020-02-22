@@ -12,7 +12,6 @@
     <idea-version since-build="183.5429"/>
 
     <depends>com.intellij.modules.lang</depends>
-    <depends optional="true" config-file="config.xml">PythonCore</depends>
-    <depends optional="true" config-file="config.xml">Pythonid</depends>
+    <depends optional="true" config-file="python-config.xml">com.intellij.modules.python</depends>
 
 </idea-plugin>
