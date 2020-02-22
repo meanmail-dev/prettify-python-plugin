@@ -7,12 +7,14 @@ https://meanmail.dev/plugin/2
 
 ### Folding
 
-">=" to "≥"
+\>= to ≥
 
-"<=" to "≤"
+<= to ≤
 
-"!=" to "≠"
+!= to ≠
 
-"->" to "➔"
+-> to ➔
 
-"lambda" to "λ"
+lambda to λ
+
+** to ^
