@@ -6,6 +6,7 @@ import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.impl.source.tree.LeafPsiElement
+import com.jetbrains.python.psi.PyBinaryExpression
 import com.jetbrains.python.psi.PyStringElement
 
 
@@ -43,6 +44,9 @@ class PrettifyFoldingBuilder : FoldingBuilder {
         val text = node.text
 
         for (entity in prettySymbolMaps.entries) {
+            if (text == "**" && node.parent !is PyBinaryExpression)
+                continue
+
             if (entity.key == text) {
                 val nodeRange = node.textRange
                 val range = TextRange.create(nodeRange.startOffset,
