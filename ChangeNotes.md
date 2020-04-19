@@ -1,3 +1,7 @@
+## 2020.2 (April 19, 2020)
+
+* Fix: Replace "**" with "^" only inside PyBinaryExpression
+
 ## 2020.1 (February, 23, 2020)
 
 + Folding ** to ^
