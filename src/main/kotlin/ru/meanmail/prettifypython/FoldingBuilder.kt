@@ -5,19 +5,23 @@ import com.intellij.lang.folding.FoldingBuilder
 import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.util.TextRange
+import com.intellij.psi.PsiElement
 import com.intellij.psi.impl.source.tree.LeafPsiElement
+import com.jetbrains.python.psi.PyBinaryExpression
 import com.jetbrains.python.psi.PyStringElement
 
 
 class PrettifyFoldingBuilder : FoldingBuilder {
 
-    private val prettySymbolMaps = hashMapOf(
-            ">=" to "≥",
-            "<=" to "≤",
-            "!=" to "≠",
-            "->" to "➔",
-            "lambda" to "λ",
-            "**" to "^"
+    private val prettySymbolMaps = hashMapOf<String, (PsiElement) -> String?>(
+            ">=" to { _: PsiElement -> "≥" },
+            "<=" to { _: PsiElement -> "≤" },
+            "!=" to { _: PsiElement -> "≠" },
+            "->" to { _: PsiElement -> "➔" },
+            "lambda" to { _: PsiElement -> "λ" },
+            "**" to { node: PsiElement ->
+                if (node.parent is PyBinaryExpression) "^" else null
+            }
     )
 
     private fun getDescriptorsForChildren(node: ASTNode): List<FoldingDescriptor> {
@@ -42,15 +46,15 @@ class PrettifyFoldingBuilder : FoldingBuilder {
         val descriptors = mutableListOf<FoldingDescriptor>()
         val text = node.text
 
-        for (entity in prettySymbolMaps.entries) {
-            if (entity.key == text) {
-                val nodeRange = node.textRange
-                val range = TextRange.create(nodeRange.startOffset,
-                        nodeRange.endOffset)
-                descriptors.add(PrettifyFoldingDescriptor(node, range, null,
-                        entity.value, true))
-            }
-        }
+        val replacerCall = prettySymbolMaps.getOrDefault(text, null)
+                ?: return emptyList()
+
+        val replacer = replacerCall(node) ?: return emptyList()
+        val nodeRange = node.textRange
+        val range = TextRange.create(nodeRange.startOffset,
+                nodeRange.endOffset)
+        descriptors.add(PrettifyFoldingDescriptor(node, range, null,
+                replacer, true))
 
         return descriptors
     }
