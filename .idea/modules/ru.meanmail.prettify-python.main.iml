@@ -55,17 +55,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: unzipped.com.jetbrains.plugins:PythonCore:unzipped.com.jetbrains.plugins:201.5616.29">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/libthrift-0.11.0.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/python-ce.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/unzipped.com.jetbrains.plugins/PythonCore-201.5616.29/python-ce/lib/completion-ranking-python-0.0.11.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
       <library name="Gradle: com.jetbrains:ideaIC:LATEST-EAP-SNAPSHOT">
         <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/LATEST-EAP-SNAPSHOT/5938b73cb851ef3b86438ffb152db3130bb53039/ideaIC-LATEST-EAP-SNAPSHOT/lib/FastInfoset-1.2.15.jar!/" />
