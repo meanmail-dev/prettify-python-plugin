@@ -43,6 +43,7 @@ class PrettifyFoldingBuilder : FoldingBuilder {
             val prefix = "src/main/kotlin/ru/meanmail/prettifypython/"
             val BasicConversions = "${prefix}BasicConversions.json"
             val GreekLetters = "${prefix}GreekLetters.json"
+            val AdvancedMath = "${prefix}AdvancedMath.json"
 
             val isPyBinExp = { node: PsiElement -> node.parent is PyBinaryExpression }
             val conditions = hashMapOf<ConversionCondition, (node: PsiElement) -> (Boolean)>(
@@ -53,6 +54,7 @@ class PrettifyFoldingBuilder : FoldingBuilder {
 
             initializeFile(BasicConversions, conditions, prettySymbolMaps, conversionListSerializer)
             initializeFile(GreekLetters, conditions, prettySymbolMaps, conversionListSerializer)
+            //initializeFile(AdvancedMath, conditions, prettySymbolMaps, conversionListSerializer)
             return prettySymbolMaps
         }
 

@@ -1,5 +1,6 @@
 [
   {"source": "alpha", "dest": "α"},
-  {"source": "beta", "dest": "β"}
+  {"source": "beta", "dest": "β"},
+  {"source": "epsilon", "dest": "ε"}
 ]
 

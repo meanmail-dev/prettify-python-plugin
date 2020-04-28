@@ -1,0 +1,4 @@
+[
+  {"source": "in", "dest": "∈"},
+  {"source": "not in", "dest": "∉"}
+]
