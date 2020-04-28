@@ -24,3 +24,9 @@ All product with python 2019.2—2020.1(eap)
 lambda to λ
 
 ** to ^
+
+### Greek Letters
+
+alpha to α
+
+beta to β

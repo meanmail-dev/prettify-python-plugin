@@ -1,0 +1,10 @@
+[
+  {"source": ">=", "dest":  "≥"},
+  {"source": "<=", "dest":  "≤"},
+  {"source": "!=", "dest":  "≠"},
+  {"source": "->", "dest":  "➔"},
+  {"source": "lambda", "dest":  "λ"},
+  {"source": "**", "dest":  "^", "cond": "PY_BINARY_EXP"}
+]
+
+
