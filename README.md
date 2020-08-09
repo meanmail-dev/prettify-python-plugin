@@ -1,4 +1,6 @@
 # prettify-python-plugin
+![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/r/stars/12017?label=JetBrans%20Marketplace)
+
 Intellij IDE plugin
 
 https://meanmail.dev/plugin/2
