@@ -10,7 +10,7 @@ Your ratings and feedback are very important. The feature will appear the faster
 
 ## Supported versions of Intellij:
 
-All product with python 2019.2—2020.1(eap)
+All product with python 2019.2—2020.3(eap)
 
 ## Features:
 
