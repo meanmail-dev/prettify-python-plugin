@@ -101,3 +101,4 @@ fabric.properties
 .idea/httpRequests
 /.sandbox/
 !/gradle/wrapper/gradle-wrapper.jar
+.idea/csv-plugin.xml
