@@ -1,7 +1,7 @@
 # prettify-python-plugin
 ![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/r/stars/12017?label=JetBrans%20Marketplace)
 ![JetBrains IntelliJ plugins](https://img.shields.io/jetbrains/plugin/d/12017)
-![Twitter Follow](https://img.shields.io/twitter/follow/meanmaildev?style=social)
+![Twitter Follow](https://img.shields.io/twitter/follow/meanmaildev?style=plastic)
 
 Intellij IDE plugin
 
