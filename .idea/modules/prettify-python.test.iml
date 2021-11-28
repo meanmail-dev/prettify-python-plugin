@@ -245,15 +245,6 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.4.30" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.30" level="project" />
-    <orderEntry type="module-library" scope="RUNTIME">
-      <library>
-        <CLASSES>
-          <root url="jar:///usr/lib/jvm/java-8-oracle/lib/tools.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
   <component name="TestModuleProperties" production-module="prettify-python.main" />
 </module>
