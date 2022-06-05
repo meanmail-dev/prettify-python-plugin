@@ -1,6 +1,4 @@
-@file:Suppress("MissingRecentApi")
-
-package ru.meanmail.prettifypython
+package dev.meanmail.prettifypython
 
 import com.intellij.lang.folding.FoldingDescriptor
 import com.intellij.openapi.editor.FoldingGroup

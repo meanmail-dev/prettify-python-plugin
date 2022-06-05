@@ -8,16 +8,18 @@ repositories {
 
 plugins {
     java
-    kotlin("jvm") version "1.5.10"
-    id("org.jetbrains.intellij") version "1.3.0"
+    kotlin("jvm") version "1.6.20"
+    id("org.jetbrains.intellij") version "1.6.0"
 }
 
 group = config("group")
 version = "${config("version")}-${config("platformVersion")}"
 
 dependencies {
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
-    testImplementation("junit:junit:4.13.2")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.20")
+    implementation("io.sentry:sentry:5.7.4")
+    testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
 }
 
 intellij {

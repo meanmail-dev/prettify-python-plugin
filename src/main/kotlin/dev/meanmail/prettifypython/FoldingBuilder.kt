@@ -1,4 +1,4 @@
-package ru.meanmail.prettifypython
+package dev.meanmail.prettifypython
 
 import com.intellij.lang.ASTNode
 import com.intellij.lang.folding.FoldingBuilder
@@ -13,12 +13,12 @@ import com.jetbrains.python.psi.PyStringElement
 
 class PrettifyFoldingBuilder : FoldingBuilder {
 
-    private val prettySymbolMaps = hashMapOf<String, (PsiElement) -> String?>(
-            ">=" to { _: PsiElement -> "≥" },
-            "<=" to { _: PsiElement -> "≤" },
-            "!=" to { _: PsiElement -> "≠" },
-            "->" to { _: PsiElement -> "➔" },
-            "lambda" to { _: PsiElement -> "λ" },
+    private val prettySymbolMaps = hashMapOf(
+            ">=" to { "≥" },
+            "<=" to { "≤" },
+            "!=" to { "≠" },
+            "->" to { "➔" },
+            "lambda" to { "λ" },
             "**" to { node: PsiElement ->
                 if (node.parent is PyBinaryExpression) "^" else null
             }
@@ -53,8 +53,10 @@ class PrettifyFoldingBuilder : FoldingBuilder {
         val nodeRange = node.textRange
         val range = TextRange.create(nodeRange.startOffset,
                 nodeRange.endOffset)
-        descriptors.add(PrettifyFoldingDescriptor(node, range, null,
-                replacer, true))
+        descriptors.add(
+            PrettifyFoldingDescriptor(node, range, null,
+                replacer, true)
+        )
 
         return descriptors
     }

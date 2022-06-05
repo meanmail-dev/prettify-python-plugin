@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/prettify-python.iml" filepath="$PROJECT_DIR$/.idea/modules/prettify-python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/prettify-python.main.iml" filepath="$PROJECT_DIR$/.idea/modules/prettify-python.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/prettify-python.test.iml" filepath="$PROJECT_DIR$/.idea/modules/prettify-python.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ru.meanmail.prettify-python.iml" filepath="$PROJECT_DIR$/.idea/modules/ru.meanmail.prettify-python.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ru.meanmail.prettify-python.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ru.meanmail.prettify-python.main.iml" />
     </modules>
   </component>
 </project>

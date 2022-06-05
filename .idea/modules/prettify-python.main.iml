@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="prettify-python:main" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="dev.meanmail" external.system.module.type="sourceSet" external.system.module.version="2020.2-2022.1" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JVM 11" allPlatforms="JVM [11]" useProjectSettings="false">
+        <compilerSettings>
+          <option name="additionalArguments" value="-Xallow-no-source-files" />
+        </compilerSettings>
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="noStdlib" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="classpath">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.6.20/dab8089bca6ac0e394c37281ea8cff2f99acd421/kotlin-stdlib-jdk8-1.6.20.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/3rd-party-rt.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/annotations-java5.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/app.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-7.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-analysis-7.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-commons-7.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-tree-7.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-util-7.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/byte-buddy-agent.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/dbus-java-3.2.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/error-prone-annotations.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/external-system-rt.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/externalProcess-rt.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/forms_rt.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/groovy.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/grpc-netty-shaded.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/intellij-coverage-agent-1.0.656.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/intellij-test-discovery.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/java-utils-1.0.6.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jetbrains-annotations.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jffi-1.2.19-native.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jffi-1.2.19.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jna.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-a64asm-1.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-constants-0.9.12.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-enxio-0.21.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-ffi-2.1.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-posix-3.0.50.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-unixsocket-0.23.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-x86asm-1.0.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jps-model.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jsch-agent.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/junit4.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/junixsocket-core.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/lz4-java.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/platform-objectSerializer-annotations.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/platform-statistics-devkit.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/protobuf.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/pty4j.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-core.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-framework.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-swing.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-text.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/stats.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/testFramework.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/util.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/util_rt.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/winp.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/plugins/python-ce/lib/python-ce.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.sentry/sentry/5.7.4/94bf6862d11821cac08e18816f3d7e72a702237/sentry-5.7.4.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.6.20/f8629f336bad4001c89e9cffa5ef3d4b5d0f5e22/kotlin-stdlib-jdk7-1.6.20.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.6.20/6cedc143badbb4f1c6b7f5a340b04edff1743208/kotlin-stdlib-1.6.20.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.6.20/27b4562b6713d70f458c6d7ea39aadacb8e6a92b/kotlin-stdlib-common-1.6.20.jar</arg>
+              </args>
+            </stringArg>
+            <stringArg name="destination" arg="$MODULE_DIR$/../../build/classes/kotlin/main" />
+            <stringArg name="jvmTarget" arg="11" />
+            <stringArg name="moduleName" arg="prettify-python" />
+            <stringArg name="apiVersion" arg="1.6" />
+            <stringArg name="languageVersion" arg="1.6" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="friendPaths" />
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.6.20/3d6e1b15fb9db1455136c932ade7d9df298c9274/kotlin-scripting-jvm-1.6.20.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.6.20/c715651864e5e186405f60e034af3b65d0eebef/kotlin-scripting-common-1.6.20.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.6.20/6cedc143badbb4f1c6b7f5a340b04edff1743208/kotlin-stdlib-1.6.20.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.6.20/27b4562b6713d70f458c6d7ea39aadacb8e6a92b/kotlin-stdlib-common-1.6.20.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.6.20/a115c367e0fd9c8909293b208689afca0c88a6f1/kotlin-script-runtime-1.6.20.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../out/production/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/kotlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/resources" type="java-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.20" level="project" />
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: com.jetbrains:pycharmPC:2022.1">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/3rd-party-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/annotations-java5.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/app.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-7.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-analysis-7.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-commons-7.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-tree-7.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/asm-util-7.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/byte-buddy-agent.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/dbus-java-3.2.1.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/error-prone-annotations.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/external-system-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/externalProcess-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/forms_rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/groovy.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/grpc-netty-shaded.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/intellij-coverage-agent-1.0.656.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/intellij-test-discovery.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/java-utils-1.0.6.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jetbrains-annotations.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jffi-1.2.19.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jffi-1.2.19-native.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jna.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-a64asm-1.0.0.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-constants-0.9.12.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-enxio-0.21.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-ffi-2.1.10.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-posix-3.0.50.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-unixsocket-0.23.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jnr-x86asm-1.0.2.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jps-model.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/jsch-agent.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/junit4.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/junixsocket-core.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/lz4-java.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/platform-objectSerializer-annotations.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/platform-statistics-devkit.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/protobuf.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/pty4j.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-core.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-framework.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-swing.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/rd-text.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/stats.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/testFramework.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/util.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/util_rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/2d44cfa9c0c6eb0a5ace83773ecc9b21f3861d6/pycharmPC-2022.1/lib/winp.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2022.1/62ecc43493050916a9f89e6f779e53e5594ce71b/pycharmPC-2022.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: unzipped.com.jetbrains.plugins:python-ce:unzipped.com.jetbrains.plugins:pycharmPC-PC-221.5080.212-withSources" level="project" />
+    <orderEntry type="library" name="Gradle: io.sentry:sentry:5.7.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains:annotations:23.0.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.20" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.6.20" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.6.20" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
+  </component>
+</module>

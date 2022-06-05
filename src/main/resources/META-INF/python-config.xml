@@ -1,6 +1,7 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
         <lang.foldingBuilder language="Python"
-                             implementationClass="ru.meanmail.prettifypython.PrettifyFoldingBuilder"/>
+                             implementationClass="dev.meanmail.prettifypython.PrettifyFoldingBuilder"/>
+        <errorHandler implementation="dev.meanmail.prettifypython.diagnostic.SentryErrorReporter"/>
     </extensions>
 </idea-plugin>
