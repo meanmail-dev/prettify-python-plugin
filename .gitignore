@@ -102,3 +102,4 @@ fabric.properties
 /.sandbox/
 !/gradle/wrapper/gradle-wrapper.jar
 .idea/csv-plugin.xml
+token.txt
