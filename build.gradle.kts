@@ -1,63 +1,74 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 
 fun config(name: String) = project.findProperty(name).toString()
 
 repositories {
     mavenCentral()
+
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 plugins {
     java
 // https://plugins.jetbrains.com/docs/intellij/using-kotlin.html#kotlin-standard-library
-    kotlin("jvm") version "1.5.10"
-    id("org.jetbrains.intellij") version "1.9.0"
+    alias(libs.plugins.kotlin) // Kotlin support
+    alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
 }
 
 group = config("group")
 version = config("version")
 
 dependencies {
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
-    implementation("io.sentry:sentry:6.4.3")
-    testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.0")
+    implementation(libs.sentry)
+    testImplementation(libs.junit)
+
+    intellijPlatform {
+        create(config("platformType"), config("platformVersion"))
+        val plugins = providers.gradleProperty("plugins").map { it.split(',') }
+        if (plugins.isPresent && plugins.get().isNotEmpty()) {
+            plugins(plugins)
+        }
+        val platformBundledPlugins = providers.gradleProperty("platformBundledPlugins").map { it.split(',') }
+        if (platformBundledPlugins.isPresent && platformBundledPlugins.get().isNotEmpty()) {
+            bundledPlugins(platformBundledPlugins)
+        }
+
+        instrumentationTools()
+        pluginVerifier()
+        zipSigner()
+        testFramework(TestFrameworkType.Platform)
+    }
 }
 
-intellij {
-    pluginName.set(config("pluginName"))
-    version.set(
-        if (config("platformVersion") == "eap") {
-            "LATEST-EAP-SNAPSHOT"
-        } else {
-            config("platformVersion")
+intellijPlatform {
+    pluginConfiguration {
+        name.set(config("pluginName"))
+        version.set(project.version.toString())
+        description.set(file("description.html").readText())
+        changeNotes.set(readChangeNotes("CHANGES.md"))
+        ideaVersion {
+            sinceBuild.set(config("platformSinceBuild"))
         }
-    )
-    type.set(config("platformType"))
-    updateSinceUntilBuild.set(false)
+    }
 
-    val usePlugins = config("usePlugins").split(',')
-    for (plugin in usePlugins) {
-        if (plugin.isEmpty()) {
-            continue
+    buildSearchableOptions = false
+
+    pluginVerification.ides {
+        recommended()
+    }
+
+    publishing {
+        try {
+            token.set(file("token.txt").readLines()[0])
+        } catch (e: Exception) {
+            println("No token.txt found")
         }
-        val (name, version) = plugin.split(':')
-        if (name == "python") {
-            when (type.get()) {
-                "PY" -> {
-                    plugins.add("python")
-                }
-
-                "PC" -> {
-                    plugins.add("PythonCore")
-                }
-
-                else -> {
-                    plugins.add("PythonCore:${version}")
-                }
-            }
-        } else {
-            plugins.add(plugin)
-        }
+        channels.set(listOf(config("publishChannel")))
     }
 }
 
@@ -114,22 +125,5 @@ tasks {
         useJUnit()
 
         maxHeapSize = "1G"
-    }
-
-    patchPluginXml {
-        version.set(project.version.toString())
-        pluginDescription.set(file("description.html").readText())
-        changeNotes.set(readChangeNotes("CHANGES.md"))
-        sinceBuild.set(config("platformSinceBuild"))
-    }
-
-    publishPlugin {
-        dependsOn("buildPlugin")
-        token.set(file("token.txt").readLines()[0])
-        channels.set(listOf(config("publishChannel")))
-    }
-
-    buildSearchableOptions {
-        enabled = false
     }
 }
