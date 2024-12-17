@@ -2,8 +2,9 @@ package dev.meanmail.prettifypython.settings
 
 import com.intellij.icons.AllIcons
 import com.intellij.ide.plugins.PluginManagerCore
-import com.intellij.openapi.actionSystem.*
-import com.intellij.openapi.actionSystem.impl.SimpleDataContext
+import com.intellij.openapi.actionSystem.ActionToolbarPosition
+import com.intellij.openapi.actionSystem.AnAction
+import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.ui.DialogWrapper
@@ -321,20 +322,6 @@ class PrettifySettingsComponent {
         mappings.forEach { addMappingToTree(it) }
         treeModel.reload()
         expandAllNodes()
-        resetButton?.let { action ->
-            val presentation = action.templatePresentation.clone()
-            action.update(
-                AnActionEvent(
-                    SimpleDataContext.EMPTY_CONTEXT,
-                    presentation,
-                    "PrettifySettingsComponent",
-                    ActionUiKind.NONE,
-                    null,
-                    0,
-                    ActionManager.getInstance()
-                )
-            )
-        }
     }
 
     private fun isDefaultMappings(): Boolean {
