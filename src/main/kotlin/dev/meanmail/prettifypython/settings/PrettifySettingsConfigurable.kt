@@ -12,21 +12,23 @@ import javax.swing.JComponent
 class PrettifySettingsConfigurable : Configurable {
     private var settingsComponent: PrettifySettingsComponent? = null
 
-    override fun getDisplayName(): String = "Prettify Python"
+    override fun getDisplayName(): String = "Pretty Python"
 
     override fun createComponent(): JComponent {
         settingsComponent = PrettifySettingsComponent()
-        return settingsComponent!!.panel
+        return settingsComponent!!.getPanel()
     }
 
     override fun isModified(): Boolean {
         val settings = PrettifySettings.getInstance()
-        return settingsComponent?.getMappings() != settings.symbolMappings
+        return settingsComponent?.getMappings() != settings.mappings
     }
 
     override fun apply() {
         val settings = PrettifySettings.getInstance()
-        settings.symbolMappings = settingsComponent?.getMappings() ?: mutableMapOf()
+        settingsComponent?.let { component ->
+            settings.mappings = component.getMappings()
+        }
 
         // Update all open files
         ApplicationManager.getApplication().invokeLater {
@@ -46,7 +48,7 @@ class PrettifySettingsConfigurable : Configurable {
 
     override fun reset() {
         val settings = PrettifySettings.getInstance()
-        settingsComponent?.setMappings(settings.symbolMappings)
+        settingsComponent?.setMappings(settings.mappings)
     }
 
     override fun disposeUIResources() {

@@ -1,101 +1,71 @@
 package dev.meanmail.prettifypython.settings
 
+import com.intellij.icons.AllIcons
+import com.intellij.openapi.actionSystem.ActionToolbarPosition
+import com.intellij.openapi.actionSystem.AnAction
+import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.Messages
 import com.intellij.ui.IdeBorderFactory
-import com.intellij.ui.components.JBLabel
-import com.intellij.ui.components.JBScrollPane
-import com.intellij.ui.components.JBTextField
-import com.intellij.util.ui.JBUI
+import com.intellij.ui.ToolbarDecorator
+import com.intellij.ui.table.JBTable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.awt.*
+import java.awt.BorderLayout
 import java.io.File
-import javax.swing.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import javax.swing.JFileChooser
+import javax.swing.JPanel
 import javax.swing.filechooser.FileNameExtensionFilter
+import javax.swing.table.AbstractTableModel
 
 class PrettifySettingsComponent {
-    private val mappingFields = mutableMapOf<JTextField, JTextField>()
     private val mainPanel: JPanel
-    private val mappingsPanel: JPanel
-    private val json = Json {
-        prettyPrint = true
-        prettyPrintIndent = "  "
-    }
+    private val mappingsTable: JBTable
+    private val tableModel: MappingsTableModel = MappingsTableModel()
+    private val json = Json { prettyPrint = true }
 
     init {
-        mappingsPanel = JPanel(GridBagLayout())
-        val settings = PrettifySettings.getInstance()
+        mappingsTable = JBTable(tableModel)
+        mappingsTable.setShowGrid(false)
+        mappingsTable.rowHeight = 22
 
-        mainPanel = JPanel(BorderLayout())
-        mainPanel.border = JBUI.Borders.empty(10)
+        val toolbarDecorator = ToolbarDecorator.createDecorator(mappingsTable)
+            .setAddAction { addMapping() }
+            .setRemoveAction { removeSelectedMappings() }
+            .setToolbarPosition(ActionToolbarPosition.RIGHT)
+            .addExtraAction(object : AnAction("Import", "Import mappings from JSON", AllIcons.Actions.Download) {
+                override fun actionPerformed(e: AnActionEvent) {
+                    importMappings()
+                }
+            })
+            .addExtraAction(object : AnAction("Export", "Export mappings to JSON", AllIcons.Actions.Upload) {
+                override fun actionPerformed(e: AnActionEvent) {
+                    exportMappings()
+                }
+            })
+            .addExtraAction(object :
+                AnAction("Reset to Default", "Reset mappings to default values", AllIcons.Actions.Rollback) {
+                override fun actionPerformed(e: AnActionEvent) {
+                    resetToDefault()
+                }
+            })
 
-        val titleLabel = JLabel("Symbol Mappings")
-        titleLabel.border = JBUI.Borders.empty(0, 0, 5, 0)
-        mainPanel.add(titleLabel, BorderLayout.NORTH)
-
-        val constraints = GridBagConstraints().apply {
-            fill = GridBagConstraints.HORIZONTAL
-            weightx = 1.0
+        mainPanel = JPanel(BorderLayout()).apply {
+            add(toolbarDecorator.createPanel(), BorderLayout.CENTER)
+            border = IdeBorderFactory.createTitledBorder("Symbol Mappings", false)
         }
+    }
 
-        // Headers
-        constraints.gridy = 0
-        constraints.gridx = 0
-        mappingsPanel.add(JBLabel("Original").apply {
-            border = JBUI.Borders.empty(0, 0, 5, 10)
-        }, constraints)
+    private fun addMapping() {
+        tableModel.addMapping("", "")
+    }
 
-        constraints.gridx = 1
-        mappingsPanel.add(JBLabel("Replacement").apply {
-            border = JBUI.Borders.empty(0, 0, 5, 10)
-        }, constraints)
-
-        constraints.gridx = 2
-        mappingsPanel.add(JBLabel(""), constraints)
-
-        // Add mapping fields
-        var row = 1
-        settings.symbolMappings.forEach { (original, replacement) ->
-            constraints.gridy = row
-            addMappingRow(constraints, original, replacement)
-            row++
+    private fun removeSelectedMappings() {
+        val selectedRows = mappingsTable.selectedRows.sortedDescending()
+        selectedRows.forEach { row ->
+            tableModel.removeMapping(row)
         }
-
-        // Add buttons panel
-        val buttonPanel = JPanel(FlowLayout(FlowLayout.LEFT))
-
-        val addButton = JButton("Add Mapping")
-        addButton.addActionListener {
-            constraints.gridy = mappingFields.size + 1
-            addMappingRow(constraints)
-            mainPanel.revalidate()
-            mainPanel.repaint()
-        }
-
-        val resetButton = JButton("Reset All to Defaults")
-        resetButton.addActionListener {
-            setMappings(PrettifySettings.DEFAULT_MAPPINGS)
-        }
-
-        val importButton = JButton("Import")
-        importButton.addActionListener {
-            importMappings()
-        }
-
-        val exportButton = JButton("Export")
-        exportButton.addActionListener {
-            exportMappings()
-        }
-
-        buttonPanel.add(addButton)
-        buttonPanel.add(resetButton)
-        buttonPanel.add(importButton)
-        buttonPanel.add(exportButton)
-
-        val scrollPane = JBScrollPane(mappingsPanel)
-        scrollPane.border = IdeBorderFactory.createEmptyBorder()
-        mainPanel.add(scrollPane, BorderLayout.CENTER)
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH)
     }
 
     private fun importMappings() {
@@ -106,10 +76,9 @@ class PrettifySettingsComponent {
 
         if (fileChooser.showOpenDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
             try {
-                val file = fileChooser.selectedFile
-                val jsonString = file.readText()
-                val mappings = json.decodeFromString<Map<String, String>>(jsonString)
-                setMappings(mappings)
+                val jsonContent = fileChooser.selectedFile.readText()
+                val importedMappings = json.decodeFromString<List<Pair<String, String>>>(jsonContent)
+                tableModel.setMappings(importedMappings)
             } catch (e: Exception) {
                 Messages.showErrorDialog(
                     mainPanel,
@@ -124,24 +93,14 @@ class PrettifySettingsComponent {
         val fileChooser = JFileChooser().apply {
             fileFilter = FileNameExtensionFilter("JSON files", "json")
             dialogTitle = "Export Mappings"
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
+            selectedFile = File("prettify_python_mappings_$timestamp.json")
         }
 
         if (fileChooser.showSaveDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
             try {
-                var file = fileChooser.selectedFile
-                if (!file.name.endsWith(".json")) {
-                    file = File(file.absolutePath + ".json")
-                }
-
-                val mappings = getMappings()
-                val jsonString = json.encodeToString(mappings)
-                file.writeText(jsonString)
-
-                Messages.showInfoMessage(
-                    mainPanel,
-                    "Mappings exported successfully",
-                    "Export Success"
-                )
+                val jsonContent = json.encodeToString(tableModel.getMappings())
+                fileChooser.selectedFile.writeText(jsonContent)
             } catch (e: Exception) {
                 Messages.showErrorDialog(
                     mainPanel,
@@ -152,76 +111,79 @@ class PrettifySettingsComponent {
         }
     }
 
-    private fun addMappingRow(constraints: GridBagConstraints, original: String = "", replacement: String = "") {
-        // Original field
-        constraints.gridx = 0
-        val originalField = JBTextField(original)
-        originalField.preferredSize = Dimension(100, originalField.preferredSize.height)
-        mappingsPanel.add(originalField, constraints)
+    private fun resetToDefault() {
+        val result = Messages.showYesNoDialog(
+            mainPanel,
+            "Are you sure you want to reset all mappings to default values?",
+            "Reset Mappings",
+            Messages.getQuestionIcon()
+        )
 
-        // Replacement field
-        constraints.gridx = 1
-        val replacementField = JBTextField(replacement)
-        replacementField.preferredSize = Dimension(100, replacementField.preferredSize.height)
-        mappingsPanel.add(replacementField, constraints)
-
-        // Delete button
-        constraints.gridx = 2
-        val deleteButton = JButton("Delete")
-        deleteButton.addActionListener {
-            mappingFields.remove(originalField)
-            mappingsPanel.remove(originalField)
-            mappingsPanel.remove(replacementField)
-            mappingsPanel.remove(deleteButton)
-            mainPanel.revalidate()
-            mainPanel.repaint()
+        if (result == Messages.YES) {
+            val settings = PrettifySettings.getInstance()
+            settings.resetToDefaults()
+            tableModel.setMappings(settings.mappings)
         }
-        mappingsPanel.add(deleteButton, constraints)
-
-        mappingFields[originalField] = replacementField
     }
 
-    val panel: JPanel get() = mainPanel
+    fun getPanel(): JPanel = mainPanel
 
-    fun getMappings(): Map<String, String> {
-        return mappingFields.entries
-            .filter { it.key.text.isNotBlank() }
-            .associate { it.key.text to it.value.text }
+    fun getMappings(): List<Pair<String, String>> = tableModel.getMappings()
+
+    fun setMappings(mappings: List<Pair<String, String>>) {
+        tableModel.setMappings(mappings)
     }
 
-    fun setMappings(mappings: Map<String, String>) {
-        mappingFields.clear()
-        mappingsPanel.removeAll()
+    private inner class MappingsTableModel : AbstractTableModel() {
+        private val columnNames = arrayOf("From", "To")
+        private val mappings = mutableListOf<Pair<String, String>>()
 
-        val constraints = GridBagConstraints().apply {
-            fill = GridBagConstraints.HORIZONTAL
-            weightx = 1.0
+        fun addMapping(from: String, to: String) {
+            mappings.add(Pair(from, to))
+            fireTableRowsInserted(mappings.size - 1, mappings.size - 1)
         }
 
-        // Headers
-        constraints.gridy = 0
-        constraints.gridx = 0
-        mappingsPanel.add(JBLabel("Original").apply {
-            border = JBUI.Borders.empty(0, 0, 5, 10)
-        }, constraints)
-
-        constraints.gridx = 1
-        mappingsPanel.add(JBLabel("Replacement").apply {
-            border = JBUI.Borders.empty(0, 0, 5, 10)
-        }, constraints)
-
-        constraints.gridx = 2
-        mappingsPanel.add(JBLabel(""), constraints)
-
-        // Add mapping fields
-        var row = 1
-        mappings.forEach { (original, replacement) ->
-            constraints.gridy = row
-            addMappingRow(constraints, original, replacement)
-            row++
+        fun removeMapping(index: Int) {
+            if (index >= 0 && index < mappings.size) {
+                mappings.removeAt(index)
+                fireTableRowsDeleted(index, index)
+            }
         }
 
-        mainPanel.revalidate()
-        mainPanel.repaint()
+        fun getMappings(): List<Pair<String, String>> = mappings.toList()
+
+        fun setMappings(newMappings: List<Pair<String, String>>) {
+            mappings.clear()
+            mappings.addAll(newMappings)
+            fireTableDataChanged()
+        }
+
+        override fun getRowCount(): Int = mappings.size
+
+        override fun getColumnCount(): Int = 2
+
+        override fun getValueAt(rowIndex: Int, columnIndex: Int): Any {
+            val mapping = mappings[rowIndex]
+            return when (columnIndex) {
+                0 -> mapping.first
+                1 -> mapping.second
+                else -> throw IllegalArgumentException("Invalid column index")
+            }
+        }
+
+        override fun getColumnName(column: Int): String = columnNames[column]
+
+        override fun isCellEditable(rowIndex: Int, columnIndex: Int): Boolean = true
+
+        override fun setValueAt(aValue: Any?, rowIndex: Int, columnIndex: Int) {
+            val current = mappings[rowIndex]
+            val newMapping = when (columnIndex) {
+                0 -> Pair(aValue.toString(), current.second)
+                1 -> Pair(current.first, aValue.toString())
+                else -> return
+            }
+            mappings[rowIndex] = newMapping
+            fireTableCellUpdated(rowIndex, columnIndex)
+        }
     }
 }

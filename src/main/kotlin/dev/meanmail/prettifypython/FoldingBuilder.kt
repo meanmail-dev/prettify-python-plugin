@@ -36,7 +36,9 @@ class PrettifyFoldingBuilder : FoldingBuilder {
         val text = node.text
 
         val settings = PrettifySettings.getInstance()
-        val replacement = settings.symbolMappings[text]
+        val replacement = settings.mappings
+            .find { it.first == text }
+            ?.second
 
         if (replacement == null || (text == "**" && node.psi.parent !is PyBinaryExpression)) {
             return emptyList()
