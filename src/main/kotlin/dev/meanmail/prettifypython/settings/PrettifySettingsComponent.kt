@@ -30,9 +30,8 @@ import javax.swing.filechooser.FileNameExtensionFilter
 import javax.swing.tree.*
 
 class PrettifySettingsComponent {
-    private val mainPanel: JPanel
     private val rootNode = DefaultMutableTreeNode("Mappings")
-    private val treeModel = DefaultTreeModel(rootNode)
+    private val treeModel = MappingTreeModel(rootNode)
     private val mappingsTree = Tree(treeModel).apply {
         isRootVisible = false
         showsRootHandles = true
@@ -53,8 +52,7 @@ class PrettifySettingsComponent {
     }
     private val json = Json { prettyPrint = true }
     private var resetButton: AnAction? = null
-
-    init {
+    private val mainPanel = JPanel(BorderLayout()).apply {
         val toolbarDecorator = ToolbarDecorator.createDecorator(mappingsTree)
             .setAddAction { addNewMapping() }
             .setRemoveAction { removeSelectedMapping() }
@@ -81,9 +79,14 @@ class PrettifySettingsComponent {
                 }
             }.also { resetButton = it })
 
-        mainPanel = JPanel(BorderLayout()).apply {
-            add(toolbarDecorator.createPanel(), BorderLayout.CENTER)
-            border = IdeBorderFactory.createTitledBorder("Symbol Mappings", false)
+        add(toolbarDecorator.createPanel(), BorderLayout.CENTER)
+        border = IdeBorderFactory.createTitledBorder("Symbol Mappings", false)
+    }
+
+    private inner class MappingTreeModel(root: TreeNode) : DefaultTreeModel(root) {
+        override fun isLeaf(node: Any?): Boolean {
+            if (node !is DefaultMutableTreeNode) return true
+            return node.userObject is MappingEntry
         }
     }
 
@@ -116,29 +119,32 @@ class PrettifySettingsComponent {
 
     private fun addMappingToTree(mapping: MappingEntry) {
         // Find or create category node
-        var categoryNode = findOrCreateCategoryNode(mapping.category)
+        val categoryNode = findOrCreateCategoryNode(mapping.category)
         val mappingNode = DefaultMutableTreeNode(mapping)
         treeModel.insertNodeInto(mappingNode, categoryNode, categoryNode.childCount)
         expandAllNodes()
     }
 
     private fun findOrCreateCategoryNode(category: String): DefaultMutableTreeNode {
+        // Search for existing category node
         for (i in 0 until rootNode.childCount) {
             val node = rootNode.getChildAt(i) as DefaultMutableTreeNode
             if (node.userObject.toString() == category) {
                 return node
             }
         }
-        val newNode = DefaultMutableTreeNode(category)
-        treeModel.insertNodeInto(newNode, rootNode, rootNode.childCount)
-        return newNode
+
+        // Create new category node if not found
+        val categoryNode = DefaultMutableTreeNode(category)
+        treeModel.insertNodeInto(categoryNode, rootNode, rootNode.childCount)
+        return categoryNode
     }
 
     private fun removeSelectedMapping() {
-        val node = mappingsTree.lastSelectedPathComponent as? DefaultMutableTreeNode ?: return
-        if (node.userObject is MappingEntry) {
-            treeModel.removeNodeFromParent(node)
-        }
+        val selectedNode = mappingsTree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return
+        if (selectedNode.userObject !is MappingEntry) return
+
+        treeModel.removeNodeFromParent(selectedNode)
     }
 
     private class MappingTransferable(private val mapping: MappingEntry) : Transferable {
@@ -157,6 +163,13 @@ class PrettifySettingsComponent {
     private inner class MappingTransferHandler(private val tree: JTree) : TransferHandler() {
         override fun getSourceActions(c: JComponent): Int = TransferHandler.MOVE
 
+        override fun createTransferable(component: JComponent): Transferable? {
+            val node = tree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return null
+            if (node.userObject !is MappingEntry) return null
+
+            return MappingTransferable(node.userObject as MappingEntry)
+        }
+
         override fun canImport(support: TransferSupport): Boolean {
             if (!support.isDrop) return false
             support.setShowDropLocation(true)
@@ -166,15 +179,8 @@ class PrettifySettingsComponent {
             val targetPath = dropLocation.path ?: return false
             val targetNode = targetPath.lastPathComponent as DefaultMutableTreeNode
 
-            // Allow dropping only on root or category nodes
-            return targetNode == rootNode || targetNode.parent == rootNode
-        }
-
-        override fun createTransferable(component: JComponent): Transferable? {
-            val node = tree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return null
-            if (node.userObject !is MappingEntry) return null
-
-            return MappingTransferable(node.userObject as MappingEntry)
+            // Allow dropping only on category nodes (not root)
+            return targetNode.parent == rootNode
         }
 
         override fun importData(support: TransferSupport): Boolean {
@@ -183,24 +189,33 @@ class PrettifySettingsComponent {
             val dropLocation = support.getDropLocation() as? JTree.DropLocation ?: return false
             val targetPath = dropLocation.path ?: return false
             val targetNode = targetPath.lastPathComponent as DefaultMutableTreeNode
+            val childIndex = dropLocation.childIndex
 
             val draggedNode = tree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return false
             val draggedMapping = draggedNode.userObject as? MappingEntry ?: return false
 
-            // Determine target category
-            val targetCategory = when {
-                targetNode == rootNode -> draggedMapping.category
-                targetNode.parent == rootNode -> targetNode.userObject.toString()
-                else -> return false
-            }
-
-            treeModel.removeNodeFromParent(draggedNode)
+            // Target category is always the category we're dropping on
+            val targetCategory = targetNode.userObject.toString()
 
             // Create new mapping with target category
             val newMapping = draggedMapping.copy(category = targetCategory)
 
-            // Add to target category
-            addMappingToTree(newMapping)
+            // Calculate insert index
+            val insertIndex = if (childIndex >= 0) childIndex else targetNode.childCount
+
+            // Create and insert the new node
+            val newMappingNode = DefaultMutableTreeNode(newMapping)
+
+            // First insert the new node
+            treeModel.insertNodeInto(newMappingNode, targetNode, insertIndex)
+
+            // Then remove the old node
+            treeModel.removeNodeFromParent(draggedNode)
+
+            // Make sure the new node is visible
+            val newPath = TreePath(newMappingNode.path)
+            tree.scrollPathToVisible(newPath)
+            tree.selectionPath = newPath
 
             expandAllNodes()
             return true
