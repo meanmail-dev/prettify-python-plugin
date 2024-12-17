@@ -36,7 +36,14 @@ Enhance the readability of your Python code with beautiful mathematical symbols!
 
 1. Go to Settings/Preferences
 2. Navigate to "Prettify Python" in the plugins list
-3. Customize replacement rules according to your preferences
+3. Here you can:
+   - Enable/disable specific replacements
+   - Add new custom replacements
+   - Edit existing replacements
+   - Organize replacements by categories
+   - Import/Export your replacement settings
+
+This is particularly useful if you're using a font with ligatures that already provides some of these replacements. You can disable those and keep only the ones you need!
 
 ## Supported IDE Versions
 
