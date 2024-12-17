@@ -82,7 +82,10 @@
           <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/util_rt.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2024.3/8b619ae462c1c424a4396804e9cf7b896aeda62/pycharmPC-2024.3-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.pycharm/pycharmPC/2024.3/8b619ae462c1c424a4396804e9cf7b896aeda62/pycharmPC-2024.3-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.3" level="project" />

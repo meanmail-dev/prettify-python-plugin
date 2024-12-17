@@ -2,10 +2,7 @@ package dev.meanmail.prettifypython.settings
 
 import com.intellij.icons.AllIcons
 import com.intellij.ide.plugins.PluginManagerCore
-import com.intellij.openapi.actionSystem.ActionManager
-import com.intellij.openapi.actionSystem.ActionToolbarPosition
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.actionSystem.impl.SimpleDataContext
 import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.extensions.PluginId
@@ -327,12 +324,13 @@ class PrettifySettingsComponent {
             val presentation = action.templatePresentation.clone()
             action.update(
                 AnActionEvent(
-                    null,
                     SimpleDataContext.EMPTY_CONTEXT,
-                    "PrettifySettingsComponent",
                     presentation,
-                    ActionManager.getInstance(),
-                    0
+                    "PrettifySettingsComponent",
+                    ActionUiKind.NONE,
+                    null,
+                    0,
+                    ActionManager.getInstance()
                 )
             )
         }
