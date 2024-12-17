@@ -1,9 +1,11 @@
 package dev.meanmail.prettifypython.settings
 
 import com.intellij.icons.AllIcons
+import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionToolbarPosition
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.impl.SimpleDataContext
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.Messages
 import com.intellij.ui.IdeBorderFactory
@@ -30,6 +32,7 @@ class PrettifySettingsComponent {
     private val treeModel: DefaultTreeModel
     private val rootNode = DefaultMutableTreeNode("Mappings")
     private val json = Json { prettyPrint = true }
+    private var resetButton: AnAction? = null
 
     init {
         treeModel = DefaultTreeModel(rootNode)
@@ -71,7 +74,11 @@ class PrettifySettingsComponent {
                 override fun actionPerformed(e: AnActionEvent) {
                     resetToDefault()
                 }
-            })
+
+                override fun update(e: AnActionEvent) {
+                    e.presentation.isEnabled = !isDefaultMappings()
+                }
+            }.also { resetButton = it })
 
         mainPanel = JPanel(BorderLayout()).apply {
             add(toolbarDecorator.createPanel(), BorderLayout.CENTER)
@@ -101,7 +108,7 @@ class PrettifySettingsComponent {
                 }
                 addMappingToTree(updatedMapping)
             }
-            TreeUtil.expandAll(mappingsTree)
+            expandAllNodes()
         }
     }
 
@@ -111,7 +118,7 @@ class PrettifySettingsComponent {
         if (dialog.isOK) {
             val mapping = dialog.getMapping()
             addMappingToTree(mapping)
-            TreeUtil.expandAll(mappingsTree)
+            expandAllNodes()
         }
     }
 
@@ -303,11 +310,45 @@ class PrettifySettingsComponent {
         return mappings
     }
 
+    private fun expandAllNodes() {
+        var row = 0
+        while (row < mappingsTree.rowCount) {
+            mappingsTree.expandRow(row)
+            row++
+        }
+    }
+
     fun setMappings(mappings: List<MappingEntry>) {
         rootNode.removeAllChildren()
-        treeModel.reload()
         mappings.forEach { addMappingToTree(it) }
-        TreeUtil.expandAll(mappingsTree)
+        treeModel.reload()
+        expandAllNodes()
+        resetButton?.let { action ->
+            val presentation = action.templatePresentation.clone()
+            action.update(
+                AnActionEvent(
+                    null,
+                    SimpleDataContext.EMPTY_CONTEXT,
+                    "PrettifySettingsComponent",
+                    presentation,
+                    ActionManager.getInstance(),
+                    0
+                )
+            )
+        }
+    }
+
+    private fun isDefaultMappings(): Boolean {
+        val currentMappings = getMappings().sortedBy { it.from }
+        val defaultMappings = PrettifySettings().getDefaultMappings().sortedBy { it.from }
+
+        if (currentMappings.size != defaultMappings.size) return false
+
+        return currentMappings.zip(defaultMappings) { current, default ->
+            current.from == default.from &&
+                    current.to == default.to &&
+                    current.category == default.category
+        }.all { it }
     }
 }
 
