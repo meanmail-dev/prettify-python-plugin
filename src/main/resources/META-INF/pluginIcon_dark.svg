@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="40px" version="1.1" width="40px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="overflow: hidden; ">
+<svg xmlns="http://www.w3.org/2000/svg" height="40px" version="1.1" width="40px"
+     style="overflow: hidden; ">
 
-<text x="21" y="23" fill="white" text-anchor="middle" alignment-baseline="central">P ≠ y
-</text>
+    <text x="21" y="23" fill="white" text-anchor="middle" alignment-baseline="central">P ≠ y
+    </text>
 
 </svg>

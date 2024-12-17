@@ -10,4 +10,16 @@
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="python-config.xml">com.intellij.modules.python</depends>
 
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.foldingBuilder language="Python"
+                             implementationClass="dev.meanmail.prettifypython.PrettifyFoldingBuilder"/>
+        <applicationService
+                serviceImplementation="dev.meanmail.prettifypython.settings.PrettifySettings"/>
+        <applicationConfigurable
+                parentId="editor"
+                instance="dev.meanmail.prettifypython.settings.PrettifySettingsConfigurable"
+                id="dev.meanmail.prettifypython.settings.PrettifySettingsConfigurable"
+                displayName="Prettify Python"/>
+    </extensions>
+
 </idea-plugin>
