@@ -25,6 +25,7 @@
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.25/f700a2f2b8f0d6d0fde48f56d894dc722fb029d7/kotlin-stdlib-1.9.25.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.9.25/43cdc99e4582c67c2b60f609d0e4c015d33a8e89/kotlin-script-runtime-1.9.25.jar</arg>
+                <arg>$KOTLIN_BUNDLED$/lib/kotlinx-serialization-compiler-plugin.jar</arg>
               </args>
             </arrayArg>
             <arrayArg name="pluginOptions" />
@@ -44,10 +45,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: io.sentry:sentry:7.19.0" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: bundledPlugin:PythonCore:2024.3+959">
+      <library name="Gradle: bundledPlugin:PythonCore:2024.3+613">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/python-ce/lib/python-ce.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/python-ce/lib/python-common.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/python-ce/lib/python-ce.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/python-ce/lib/python-common.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -56,100 +57,104 @@
     <orderEntry type="module-library" scope="PROVIDED">
       <library name="Gradle: python:pycharm-community:aarch64:2024.3">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/annotations.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/app.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/app-client.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/bouncy-castle.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/external-system-rt.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/externalProcess-rt.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/forms_rt.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/groovy.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/jps-model.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/jsch-agent.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/kotlinx-coroutines-slf4j-1.8.0-intellij.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/lib.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/lib-client.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/nio-fs.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/opentelemetry.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/platform-loader.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/protobuf.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/rd.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/stats.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/trove.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/util.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/util-8.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/lib/util_rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/annotations.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/app.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/app-client.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/bouncy-castle.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/external-system-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/externalProcess-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/forms_rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/groovy.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/jps-model.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/jsch-agent.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/kotlinx-coroutines-slf4j-1.8.0-intellij.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/lib.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/lib-client.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/nio-fs.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/opentelemetry.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/platform-loader.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/protobuf.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/rd.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/stats.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/trove.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/util.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/util-8.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/lib/util_rt.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:tanvd.grazi:243.21565.199+322" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:training:243.21565.199+22" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:org.jetbrains.plugins.terminal:243.21565.199+814" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:tanvd.grazi:243.21565.199+968" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:training:243.21565.199+600" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:org.jetbrains.plugins.terminal:243.21565.199+348" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: bundledPlugin:org.intellij.plugins.markdown:243.21565.199+719">
+      <library name="Gradle: bundledPlugin:org.intellij.plugins.markdown:243.21565.199+415">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/markdown/lib/modules/intellij.markdown.compose.preview.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/markdown/lib/markdown.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/markdown/lib/modules/intellij.markdown.compose.preview.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/markdown/lib/markdown.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:org.toml.lang:243.21565.199+188" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:org.toml.lang:243.21565.199+706" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: bundledPlugin:com.intellij.modules.json:243.21565.199+190">
+      <library name="Gradle: bundledPlugin:com.intellij.modules.json:243.21565.199+704">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/json/lib/json.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/json/lib/json-split.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/json/lib/json.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/json/lib/json-split.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.intellij.copyright:243.21565.199+69" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.intellij.copyright:243.21565.199+881" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: bundledPlugin:org.intellij.intelliLang:243.21565.199+567">
+      <library name="Gradle: bundledPlugin:org.intellij.intelliLang:243.21565.199+537">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/platform-langInjection/lib/java-langInjection-jps.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/platform-langInjection/lib/platform-langInjection.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/platform-langInjection/lib/java-langInjection-jps.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/platform-langInjection/lib/platform-langInjection.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.libraries.ktor.client:243.21565.199+724" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.libraries.ktor.client.cio:243.21565.199+724" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.libraries.ktor.client:243.21565.199+322" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.libraries.ktor.client.cio:243.21565.199+322" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:2.0.20" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: bundledPlugin:org.jetbrains.plugins.yaml:243.21565.199+687">
+      <library name="Gradle: bundledPlugin:org.jetbrains.plugins.yaml:243.21565.199+207">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/yaml/lib/yaml.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/yaml/lib/yaml-editing.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/yaml/lib/yaml.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/yaml/lib/yaml-editing.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.intellij.properties:243.21565.199+915" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.vcs.impl:243.21565.199+724" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.intellij.properties:243.21565.199+781" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.vcs.impl:243.21565.199+322" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
-      <library name="Gradle: bundledPlugin:Git4Idea:243.21565.199+127">
+      <library name="Gradle: bundledPlugin:Git4Idea:243.21565.199+379">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/vcs-git/lib/git4idea-rt.jar!/" />
-          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b73c0710d48bac9d0c01e5c25d576075/transformed/pycharm-community-2024.3-aarch64/plugins/vcs-git/lib/vcs-git.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/vcs-git/lib/git4idea-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/8.11.1/transforms/b8f7d0428b8adfc35f40a15103be393d/transformed/pycharm-community-2024.3-aarch64/plugins/vcs-git/lib/vcs-git.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.tips:243.21565.199+724" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.lvcs.impl:243.21565.199+724" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.ide.newUiOnboarding:243.21565.199+724" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.jetbrains.sh:243.21565.199+169" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.intellij.platform.images:243.21565.199+960" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.jetbrains.performancePlugin:243.21565.199+450" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.collaborationTools:243.21565.199+724" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.vcs.log.impl:243.21565.199+724" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.tips:243.21565.199+322" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.lvcs.impl:243.21565.199+322" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.ide.newUiOnboarding:243.21565.199+322" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.jetbrains.sh:243.21565.199+627" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.intellij.platform.images:243.21565.199+538" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.jetbrains.performancePlugin:243.21565.199+680" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.collaborationTools:243.21565.199+322" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.vcs.log.impl:243.21565.199+322" level="project" />
   </component>
 </module>

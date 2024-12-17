@@ -2,6 +2,7 @@
 # libraries
 junit = "4.13.2"
 sentry = "7.19.0"
+kotlinxSerialization = "1.6.3"
 
 # plugins
 intelliJPlatform = "2.1.0"
@@ -10,7 +11,9 @@ kotlin = "1.9.25"
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 sentry = { group = "io.sentry", name = "sentry", version.ref = "sentry" }
+kotlinxSerialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
 [plugins]
 intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "intelliJPlatform" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

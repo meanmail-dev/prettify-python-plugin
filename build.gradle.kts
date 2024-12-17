@@ -1,7 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
-import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
-import org.jetbrains.intellij.platform.gradle.models.ProductRelease
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun config(name: String) = project.findProperty(name).toString()
 
@@ -16,14 +14,16 @@ repositories {
 plugins {
     java
 // https://plugins.jetbrains.com/docs/intellij/using-kotlin.html#kotlin-standard-library
-    alias(libs.plugins.kotlin) // Kotlin support
-    alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.intelliJPlatform)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 group = config("group")
 version = config("version")
 
 dependencies {
+    implementation(libs.kotlinxSerialization)
     implementation(libs.sentry)
     testImplementation(libs.junit)
 

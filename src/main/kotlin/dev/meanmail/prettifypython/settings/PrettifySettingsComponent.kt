@@ -1,23 +1,26 @@
 package dev.meanmail.prettifypython.settings
 
+import com.intellij.openapi.ui.Messages
 import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.JBUI
-import java.awt.BorderLayout
-import java.awt.Dimension
-import java.awt.GridBagConstraints
-import java.awt.GridBagLayout
-import javax.swing.JButton
-import javax.swing.JLabel
-import javax.swing.JPanel
-import javax.swing.JTextField
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.awt.*
+import java.io.File
+import javax.swing.*
+import javax.swing.filechooser.FileNameExtensionFilter
 
 class PrettifySettingsComponent {
     private val mappingFields = mutableMapOf<JTextField, JTextField>()
     private val mainPanel: JPanel
     private val mappingsPanel: JPanel
+    private val json = Json {
+        prettyPrint = true
+        prettyPrintIndent = "  "
+    }
 
     init {
         mappingsPanel = JPanel(GridBagLayout())
@@ -58,8 +61,8 @@ class PrettifySettingsComponent {
             row++
         }
 
-        // Add and Reset buttons panel
-        val buttonPanel = JPanel(BorderLayout())
+        // Add buttons panel
+        val buttonPanel = JPanel(FlowLayout(FlowLayout.LEFT))
 
         val addButton = JButton("Add Mapping")
         addButton.addActionListener {
@@ -74,13 +77,79 @@ class PrettifySettingsComponent {
             setMappings(PrettifySettings.DEFAULT_MAPPINGS)
         }
 
-        buttonPanel.add(addButton, BorderLayout.WEST)
-        buttonPanel.add(resetButton, BorderLayout.EAST)
+        val importButton = JButton("Import")
+        importButton.addActionListener {
+            importMappings()
+        }
+
+        val exportButton = JButton("Export")
+        exportButton.addActionListener {
+            exportMappings()
+        }
+
+        buttonPanel.add(addButton)
+        buttonPanel.add(resetButton)
+        buttonPanel.add(importButton)
+        buttonPanel.add(exportButton)
 
         val scrollPane = JBScrollPane(mappingsPanel)
         scrollPane.border = IdeBorderFactory.createEmptyBorder()
         mainPanel.add(scrollPane, BorderLayout.CENTER)
         mainPanel.add(buttonPanel, BorderLayout.SOUTH)
+    }
+
+    private fun importMappings() {
+        val fileChooser = JFileChooser().apply {
+            fileFilter = FileNameExtensionFilter("JSON files", "json")
+            dialogTitle = "Import Mappings"
+        }
+
+        if (fileChooser.showOpenDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
+            try {
+                val file = fileChooser.selectedFile
+                val jsonString = file.readText()
+                val mappings = json.decodeFromString<Map<String, String>>(jsonString)
+                setMappings(mappings)
+            } catch (e: Exception) {
+                Messages.showErrorDialog(
+                    mainPanel,
+                    "Failed to import mappings: ${e.message}",
+                    "Import Error"
+                )
+            }
+        }
+    }
+
+    private fun exportMappings() {
+        val fileChooser = JFileChooser().apply {
+            fileFilter = FileNameExtensionFilter("JSON files", "json")
+            dialogTitle = "Export Mappings"
+        }
+
+        if (fileChooser.showSaveDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
+            try {
+                var file = fileChooser.selectedFile
+                if (!file.name.endsWith(".json")) {
+                    file = File(file.absolutePath + ".json")
+                }
+
+                val mappings = getMappings()
+                val jsonString = json.encodeToString(mappings)
+                file.writeText(jsonString)
+
+                Messages.showInfoMessage(
+                    mainPanel,
+                    "Mappings exported successfully",
+                    "Export Success"
+                )
+            } catch (e: Exception) {
+                Messages.showErrorDialog(
+                    mainPanel,
+                    "Failed to export mappings: ${e.message}",
+                    "Export Error"
+                )
+            }
+        }
     }
 
     private fun addMappingRow(constraints: GridBagConstraints, original: String = "", replacement: String = "") {
