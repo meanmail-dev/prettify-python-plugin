@@ -7,14 +7,19 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.extensions.PluginId
+import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.Messages
 import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.treeStructure.Tree
+import com.intellij.util.ui.JBUI
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.awt.*
+import java.awt.BorderLayout
+import java.awt.Component
+import java.awt.GridBagConstraints
+import java.awt.GridBagLayout
 import java.awt.datatransfer.DataFlavor
 import java.awt.datatransfer.Transferable
 import java.awt.datatransfer.UnsupportedFlavorException
@@ -160,7 +165,7 @@ class PrettifySettingsComponent {
     }
 
     private inner class MappingTransferHandler(private val tree: JTree) : TransferHandler() {
-        override fun getSourceActions(c: JComponent): Int = TransferHandler.MOVE
+        override fun getSourceActions(c: JComponent): Int = MOVE
 
         override fun createTransferable(component: JComponent): Transferable? {
             val node = tree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return null
@@ -378,8 +383,8 @@ private class MappingTreeCellRenderer : DefaultTreeCellRenderer() {
 private class MappingDialog(
     parent: Component,
     title: String,
-    private val mapping: MappingEntry? = null,
-    private val existingCategories: List<String>
+    mapping: MappingEntry? = null,
+    existingCategories: List<String>
 ) : DialogWrapper(parent, true) {
     private val categoryField: JComboBox<String>
     private val fromField: JTextField
@@ -389,7 +394,7 @@ private class MappingDialog(
     init {
         this.title = title
 
-        categoryField = JComboBox(existingCategories.toTypedArray())
+        categoryField = ComboBox(existingCategories.toTypedArray())
         categoryField.isEditable = true
         fromField = JTextField()
         toField = JTextField()
@@ -404,7 +409,7 @@ private class MappingDialog(
         val constraints = GridBagConstraints()
         constraints.fill = GridBagConstraints.HORIZONTAL
         constraints.weightx = 1.0
-        constraints.insets = Insets(5, 5, 5, 5)
+        constraints.insets = JBUI.insets(5)
 
         constraints.gridx = 0
         constraints.gridy = 0

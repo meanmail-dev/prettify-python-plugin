@@ -47,11 +47,6 @@ class PrettifySettings : PersistentStateComponent<PrettifySettings.State> {
         return DEFAULT_MAPPINGS
     }
 
-    fun resetToDefaults() {
-        myState.mappings = getDefaultMappings()
-        myState.categories = myState.mappings.map { it.category }.toSet()
-    }
-
     companion object {
         fun getInstance(): PrettifySettings =
             ApplicationManager.getApplication().getService(PrettifySettings::class.java)

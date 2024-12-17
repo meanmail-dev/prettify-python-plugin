@@ -83,11 +83,9 @@ class SentryErrorReporter : ErrorReportSubmitter() {
                             "IDE company url" to applicationInfo.companyURL,
                             "IDE api version" to applicationInfo.apiVersion
                         )
-                        event.setExtras(
-                            mapOf(
-                                "Additional info" to additionalInfo,
-                                "Event date" to ideaEvent.data.date
-                            )
+                        event.extras = mapOf(
+                            "Additional info" to additionalInfo,
+                            "Event date" to ideaEvent.data.date
                         )
                         SentryClient.captureEvent(event)
                     }
