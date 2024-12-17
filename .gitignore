@@ -103,3 +103,4 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 .idea/csv-plugin.xml
 token.txt
+.intellijPlatform
