@@ -11,12 +11,12 @@ import com.intellij.openapi.ui.Messages
 import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.treeStructure.Tree
-import com.intellij.util.ui.tree.TreeUtil
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.awt.*
 import java.awt.datatransfer.DataFlavor
 import java.awt.datatransfer.Transferable
+import java.awt.datatransfer.UnsupportedFlavorException
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.io.File
@@ -28,36 +28,34 @@ import javax.swing.tree.*
 
 class PrettifySettingsComponent {
     private val mainPanel: JPanel
-    private val mappingsTree: Tree
-    private val treeModel: DefaultTreeModel
     private val rootNode = DefaultMutableTreeNode("Mappings")
+    private val treeModel = DefaultTreeModel(rootNode)
+    private val mappingsTree = Tree(treeModel).apply {
+        isRootVisible = false
+        showsRootHandles = true
+        selectionModel.selectionMode = TreeSelectionModel.SINGLE_TREE_SELECTION
+        cellRenderer = MappingTreeCellRenderer()
+        transferHandler = MappingTransferHandler(this)
+        dragEnabled = true
+        dropMode = DropMode.INSERT
+
+        addMouseListener(object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent) {
+                if (e.clickCount == 2) {
+                    val node = lastSelectedPathComponent as? DefaultMutableTreeNode ?: return
+                    editMapping(node)
+                }
+            }
+        })
+    }
     private val json = Json { prettyPrint = true }
     private var resetButton: AnAction? = null
 
     init {
-        treeModel = DefaultTreeModel(rootNode)
-        mappingsTree = Tree(treeModel).apply {
-            isRootVisible = false
-            showsRootHandles = true
-            selectionModel.selectionMode = TreeSelectionModel.SINGLE_TREE_SELECTION
-            cellRenderer = MappingTreeCellRenderer()
-            dragEnabled = true
-            dropMode = DropMode.ON_OR_INSERT
-            transferHandler = MappingTransferHandler()
-
-            addMouseListener(object : MouseAdapter() {
-                override fun mouseClicked(e: MouseEvent) {
-                    if (e.clickCount == 2) {
-                        editSelectedMapping()
-                    }
-                }
-            })
-        }
-
         val toolbarDecorator = ToolbarDecorator.createDecorator(mappingsTree)
-            .setAddAction { addMapping() }
+            .setAddAction { addNewMapping() }
             .setRemoveAction { removeSelectedMapping() }
-            .setEditAction { editSelectedMapping() }
+            .setEditAction { editMapping(mappingsTree.lastSelectedPathComponent as DefaultMutableTreeNode) }
             .setToolbarPosition(ActionToolbarPosition.RIGHT)
             .addExtraAction(object : AnAction("Import", "Import mappings from JSON", AllIcons.Actions.Download) {
                 override fun actionPerformed(e: AnActionEvent) {
@@ -86,52 +84,45 @@ class PrettifySettingsComponent {
         }
     }
 
-    private fun editSelectedMapping() {
-        val node = mappingsTree.lastSelectedPathComponent as? DefaultMutableTreeNode ?: return
-        val mapping = node.userObject as? MappingEntry ?: return
-
-        val dialog = AddMappingDialog(mainPanel, mapping)
-        dialog.show()
-        if (dialog.isOK) {
+    private fun editMapping(node: DefaultMutableTreeNode) {
+        val mapping = node.userObject as MappingEntry
+        val existingCategories = getAllCategories()
+        val dialog = MappingDialog(mainPanel, "Edit Mapping", mapping, existingCategories)
+        if (dialog.showAndGet()) {
             val updatedMapping = dialog.getMapping()
-            val parent = node.parent as DefaultMutableTreeNode
-
-            if (updatedMapping.category == mapping.category) {
-                // If the category hasn't changed, just update the node
-                node.userObject = updatedMapping
-                treeModel.nodeChanged(node)
-            } else {
-                // If the category has changed, move to the new category
-                treeModel.removeNodeFromParent(node)
-                if (parent != rootNode && parent.childCount == 0) {
-                    treeModel.removeNodeFromParent(parent)
-                }
+            if (node.parent != null) {
+                val parent = node.parent as DefaultMutableTreeNode
+                parent.remove(node)
                 addMappingToTree(updatedMapping)
+                treeModel.reload()
+                expandAllNodes()
             }
-            expandAllNodes()
         }
     }
 
-    private fun addMapping() {
-        val dialog = AddMappingDialog(mainPanel)
-        dialog.show()
-        if (dialog.isOK) {
+    private fun addNewMapping() {
+        val existingCategories = getAllCategories()
+        val dialog = MappingDialog(mainPanel, "Add New Mapping", existingCategories = existingCategories)
+        if (dialog.showAndGet()) {
             val mapping = dialog.getMapping()
             addMappingToTree(mapping)
+            treeModel.reload()
             expandAllNodes()
         }
     }
 
     private fun addMappingToTree(mapping: MappingEntry) {
-        val categoryNode = findOrCreateCategoryNode(mapping.category)
+        // Find or create category node
+        var categoryNode = findOrCreateCategoryNode(mapping.category)
         val mappingNode = DefaultMutableTreeNode(mapping)
         treeModel.insertNodeInto(mappingNode, categoryNode, categoryNode.childCount)
+        expandAllNodes()
     }
 
     private fun findOrCreateCategoryNode(category: String): DefaultMutableTreeNode {
         for (i in 0 until rootNode.childCount) {
             val node = rootNode.getChildAt(i) as DefaultMutableTreeNode
-            if (node.userObject == category) {
+            if (node.userObject.toString() == category) {
                 return node
             }
         }
@@ -144,106 +135,73 @@ class PrettifySettingsComponent {
         val node = mappingsTree.lastSelectedPathComponent as? DefaultMutableTreeNode ?: return
         if (node.userObject is MappingEntry) {
             treeModel.removeNodeFromParent(node)
-            val parent = node.parent as DefaultMutableTreeNode
-            if (parent != rootNode && parent.childCount == 0) {
-                treeModel.removeNodeFromParent(parent)
-            }
         }
     }
 
-    private inner class MappingTransferHandler : TransferHandler() {
+    private class MappingTransferable(private val mapping: MappingEntry) : Transferable {
+        companion object {
+            val mappingFlavor = DataFlavor(MappingEntry::class.java, "Mapping Entry")
+        }
+
+        override fun getTransferDataFlavors(): Array<DataFlavor> = arrayOf(mappingFlavor)
+        override fun isDataFlavorSupported(flavor: DataFlavor): Boolean = flavor == mappingFlavor
+        override fun getTransferData(flavor: DataFlavor): Any {
+            if (!isDataFlavorSupported(flavor)) throw UnsupportedFlavorException(flavor)
+            return mapping
+        }
+    }
+
+    private inner class MappingTransferHandler(private val tree: JTree) : TransferHandler() {
         override fun getSourceActions(c: JComponent): Int = TransferHandler.MOVE
 
         override fun canImport(support: TransferSupport): Boolean {
             if (!support.isDrop) return false
-            if (!support.isDataFlavorSupported(DataFlavor.stringFlavor)) return false
+            support.setShowDropLocation(true)
+            if (!support.isDataFlavorSupported(MappingTransferable.mappingFlavor)) return false
 
-            val dropLocation = support.dropLocation as? JTree.DropLocation ?: return false
-            val targetPath = dropLocation.path ?: return false  // If targetPath is null, cancel
-            val targetNode = targetPath.lastPathComponent as? DefaultMutableTreeNode ?: return false
+            val dropLocation = support.getDropLocation() as? JTree.DropLocation ?: return false
+            val targetPath = dropLocation.path ?: return false
+            val targetNode = targetPath.lastPathComponent as DefaultMutableTreeNode
 
-            // Don't allow dropping on root node
-            if (targetNode == rootNode) return false
-
-            // Allow drop only on categories or between mappings
-            return when (targetNode.userObject) {
-                is String -> true // Category
-                is MappingEntry -> true // Between mappings
-                else -> false
-            }
+            // Allow dropping only on root or category nodes
+            return targetNode == rootNode || targetNode.parent == rootNode
         }
 
         override fun createTransferable(component: JComponent): Transferable? {
-            val tree = component as? JTree ?: return null
             val node = tree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return null
             if (node.userObject !is MappingEntry) return null
 
-            return object : Transferable {
-                override fun getTransferDataFlavors(): Array<DataFlavor> = arrayOf(DataFlavor.stringFlavor)
-                override fun isDataFlavorSupported(flavor: DataFlavor): Boolean = flavor == DataFlavor.stringFlavor
-                override fun getTransferData(flavor: DataFlavor): Any = ""
-            }
+            return MappingTransferable(node.userObject as MappingEntry)
         }
 
         override fun importData(support: TransferSupport): Boolean {
             if (!canImport(support)) return false
 
-            val dropLocation = support.dropLocation as JTree.DropLocation
-            val targetPath = dropLocation.path ?: return false  // If targetPath is null, cancel
+            val dropLocation = support.getDropLocation() as? JTree.DropLocation ?: return false
+            val targetPath = dropLocation.path ?: return false
             val targetNode = targetPath.lastPathComponent as DefaultMutableTreeNode
 
-            val draggedNode = mappingsTree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return false
+            val draggedNode = tree.selectionPath?.lastPathComponent as? DefaultMutableTreeNode ?: return false
             val draggedMapping = draggedNode.userObject as? MappingEntry ?: return false
 
             // Determine target category
-            val targetCategory = when (val targetObject = targetNode.userObject) {
-                is String -> targetObject // Drop on category
-                is MappingEntry -> (targetNode.parent as DefaultMutableTreeNode).userObject as String // Drop between mappings
+            val targetCategory = when {
+                targetNode == rootNode -> draggedMapping.category
+                targetNode.parent == rootNode -> targetNode.userObject.toString()
                 else -> return false
             }
 
-            // If category hasn't changed and it's not an insertion between elements, cancel
-            if (targetCategory == (draggedNode.parent as DefaultMutableTreeNode).userObject &&
-                targetNode.userObject is String && dropLocation.childIndex < 0
-            ) {
-                return false
-            }
+            // Remove old node
+            val oldParent = draggedNode.parent as DefaultMutableTreeNode
+            treeModel.removeNodeFromParent(draggedNode)
 
-            // Create new mapping with updated category
+            // Create new mapping with target category
             val newMapping = draggedMapping.copy(category = targetCategory)
 
-            // Remove old node
-            treeModel.removeNodeFromParent(draggedNode)
-            val oldParent = draggedNode.parent as? DefaultMutableTreeNode
-            if (oldParent != null && oldParent != rootNode && oldParent.childCount == 0) {
-                treeModel.removeNodeFromParent(oldParent)
-            }
+            // Add to target category
+            addMappingToTree(newMapping)
 
-            // Add new node
-            val newNode = DefaultMutableTreeNode(newMapping)
-            val categoryNode = findOrCreateCategoryNode(targetCategory)
-
-            // Calculate insert position
-            val insertIndex = when {
-                // If dropping on a mapping
-                targetNode.userObject is MappingEntry -> {
-                    val targetIndex = categoryNode.getIndex(targetNode)
-                    // If dropping after the target node
-                    if (dropLocation.childIndex > targetIndex) targetIndex + 1 else targetIndex
-                }
-                // If dropping on a category with specific index
-                dropLocation.childIndex >= 0 -> dropLocation.childIndex
-                // If dropping at the end of category
-                else -> categoryNode.childCount
-            }
-
-            treeModel.insertNodeInto(newNode, categoryNode, insertIndex)
-            val path = TreePath(categoryNode.path)
-            val row = mappingsTree.getRowForPath(path)
-            if (row >= 0) {
-                TreeUtil.expand(mappingsTree, row)
-            }
-
+            expandAllNodes()
             return true
         }
     }
@@ -311,10 +269,9 @@ class PrettifySettingsComponent {
     }
 
     private fun expandAllNodes() {
-        var row = 0
-        while (row < mappingsTree.rowCount) {
-            mappingsTree.expandRow(row)
-            row++
+        for (i in 0 until rootNode.childCount) {
+            val path = TreePath(arrayOf(rootNode, rootNode.getChildAt(i)))
+            mappingsTree.expandPath(path)
         }
     }
 
@@ -350,6 +307,15 @@ class PrettifySettingsComponent {
                     current.category == default.category
         }.all { it }
     }
+
+    private fun getAllCategories(): List<String> {
+        val categories = mutableListOf<String>()
+        for (i in 0 until rootNode.childCount) {
+            val categoryNode = rootNode.getChildAt(i) as DefaultMutableTreeNode
+            categories.add(categoryNode.userObject.toString())
+        }
+        return categories
+    }
 }
 
 private class MappingTreeCellRenderer : DefaultTreeCellRenderer() {
@@ -380,52 +346,68 @@ private class MappingTreeCellRenderer : DefaultTreeCellRenderer() {
     }
 }
 
-private class AddMappingDialog(parent: Component, private val existingMapping: MappingEntry? = null) :
-    DialogWrapper(parent, true) {
-    private val fromField = JTextField()
-    private val toField = JTextField()
-    private val categoryField = JTextField()
+private class MappingDialog(
+    parent: Component,
+    title: String,
+    private val mapping: MappingEntry? = null,
+    private val existingCategories: List<String>
+) : DialogWrapper(parent, true) {
+    private val categoryField: JComboBox<String>
+    private val fromField: JTextField
+    private val toField: JTextField
+    private val panel: JPanel
 
     init {
-        title = if (existingMapping == null) "Add Mapping" else "Edit Mapping"
-        existingMapping?.let {
+        this.title = title
+
+        categoryField = JComboBox(existingCategories.toTypedArray())
+        categoryField.isEditable = true
+        fromField = JTextField()
+        toField = JTextField()
+
+        mapping?.let {
+            categoryField.selectedItem = it.category
             fromField.text = it.from
             toField.text = it.to
-            categoryField.text = it.category
         }
+
+        panel = JPanel(GridBagLayout())
+        val constraints = GridBagConstraints()
+        constraints.fill = GridBagConstraints.HORIZONTAL
+        constraints.weightx = 1.0
+        constraints.insets = Insets(5, 5, 5, 5)
+
+        constraints.gridx = 0
+        constraints.gridy = 0
+        panel.add(JLabel("Category:"), constraints)
+        constraints.gridx = 1
+        panel.add(categoryField, constraints)
+
+        constraints.gridx = 0
+        constraints.gridy = 1
+        panel.add(JLabel("From:"), constraints)
+        constraints.gridx = 1
+        panel.add(fromField, constraints)
+
+        constraints.gridx = 0
+        constraints.gridy = 2
+        panel.add(JLabel("To:"), constraints)
+        constraints.gridx = 1
+        panel.add(toField, constraints)
+
         init()
     }
 
-    override fun createCenterPanel(): JComponent {
-        val panel = JPanel(GridBagLayout())
-        val gbc = GridBagConstraints()
-        gbc.fill = GridBagConstraints.HORIZONTAL
-        gbc.insets = Insets(5, 5, 5, 5)
+    override fun createCenterPanel(): JComponent = panel
 
-        gbc.gridx = 0
-        gbc.gridy = 0
-        panel.add(JLabel("From:"), gbc)
-        gbc.gridx = 1
-        panel.add(fromField, gbc)
-
-        gbc.gridx = 0
-        gbc.gridy = 1
-        panel.add(JLabel("To:"), gbc)
-        gbc.gridx = 1
-        panel.add(toField, gbc)
-
-        gbc.gridx = 0
-        gbc.gridy = 2
-        panel.add(JLabel("Category:"), gbc)
-        gbc.gridx = 1
-        panel.add(categoryField, gbc)
-
-        return panel
+    fun getMapping(): MappingEntry {
+        val category = categoryField.selectedItem?.toString() ?: ""
+        val from = fromField.text
+        val to = toField.text
+        return MappingEntry(
+            category = category,
+            from = from,
+            to = to
+        )
     }
-
-    fun getMapping(): MappingEntry = MappingEntry(
-        from = fromField.text,
-        to = toField.text,
-        category = categoryField.text
-    )
 }
