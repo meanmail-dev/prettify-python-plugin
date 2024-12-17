@@ -21,6 +21,7 @@ import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.io.File
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import javax.swing.*
 import javax.swing.filechooser.FileNameExtensionFilter
@@ -251,7 +252,7 @@ class PrettifySettingsComponent {
             dialogTitle = "Export Mappings"
             fileSelectionMode = JFileChooser.FILES_ONLY
             fileFilter = FileNameExtensionFilter("JSON files", "json")
-            val now = LocalDateTime.now()
+            val now = LocalDateTime.now(ZoneOffset.UTC)
             val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
             selectedFile = File("prettify_python_mappings_${now.format(formatter)}.json")
         }
@@ -264,7 +265,7 @@ class PrettifySettingsComponent {
                 val plugin = PluginManagerCore.getPlugin(pluginId)
                     ?: throw IllegalStateException("Plugin not found")
 
-                val now = LocalDateTime.now()
+                val now = LocalDateTime.now(ZoneOffset.UTC)
                 val mappingsData = MappingsData(
                     mappings = mappings,
                     ideVersion = ApplicationInfo.getInstance().fullVersion,
