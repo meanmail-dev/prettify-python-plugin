@@ -1,3 +1,11 @@
+## 2024.1 (December 17, 2024)
+
+* Added settings panel for symbol mappings
+* Added support for mapping categories
+* Added JSON import/export functionality for mappings
+* Added drag-and-drop support for sorting
+* Updated Gradle, Java and IntelliJ Platform versions
+
 ## 2020.2 (April 19, 2020)
 
 * Fix: Replace "**" with "^" only inside PyBinaryExpression
@@ -7,7 +15,7 @@
 + Folding ** to ^
 
 ## 2019.2.3 (December, 04, 2019)
-           
+
 * Version for Intellij 2019.3.*
 * jvmTarget 11
 

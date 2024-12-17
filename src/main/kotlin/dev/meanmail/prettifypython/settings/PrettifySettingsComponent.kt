@@ -1,11 +1,14 @@
 package dev.meanmail.prettifypython.settings
 
 import com.intellij.icons.AllIcons
+import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionToolbarPosition
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.impl.SimpleDataContext
+import com.intellij.openapi.application.ApplicationInfo
+import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.Messages
 import com.intellij.ui.IdeBorderFactory
@@ -191,8 +194,6 @@ class PrettifySettingsComponent {
                 else -> return false
             }
 
-            // Remove old node
-            val oldParent = draggedNode.parent as DefaultMutableTreeNode
             treeModel.removeNodeFromParent(draggedNode)
 
             // Create new mapping with target category
@@ -208,20 +209,26 @@ class PrettifySettingsComponent {
 
     private fun importMappings() {
         val fileChooser = JFileChooser().apply {
-            fileFilter = FileNameExtensionFilter("JSON files", "json")
             dialogTitle = "Import Mappings"
+            fileSelectionMode = JFileChooser.FILES_ONLY
+            fileFilter = FileNameExtensionFilter("JSON files", "json")
         }
 
         if (fileChooser.showOpenDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
             try {
-                val jsonContent = fileChooser.selectedFile.readText()
-                val importedMappings = json.decodeFromString<List<MappingEntry>>(jsonContent)
-                setMappings(importedMappings)
+                val jsonString = fileChooser.selectedFile.readText()
+                val mappingsData = json.decodeFromString<MappingsData>(jsonString)
+                setMappings(mappingsData.mappings)
+                Messages.showInfoMessage(
+                    mainPanel,
+                    "Mappings imported successfully",
+                    "Import Successful"
+                )
             } catch (e: Exception) {
                 Messages.showErrorDialog(
                     mainPanel,
                     "Failed to import mappings: ${e.message}",
-                    "Import Error"
+                    "Import Failed"
                 )
             }
         }
@@ -229,21 +236,42 @@ class PrettifySettingsComponent {
 
     private fun exportMappings() {
         val fileChooser = JFileChooser().apply {
-            fileFilter = FileNameExtensionFilter("JSON files", "json")
             dialogTitle = "Export Mappings"
-            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
-            selectedFile = File("prettify_python_mappings_$timestamp.json")
+            fileSelectionMode = JFileChooser.FILES_ONLY
+            fileFilter = FileNameExtensionFilter("JSON files", "json")
+            val now = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
+            selectedFile = File("prettify_python_mappings_${now.format(formatter)}.json")
         }
 
         if (fileChooser.showSaveDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
             try {
-                val jsonContent = json.encodeToString(getMappings())
-                fileChooser.selectedFile.writeText(jsonContent)
+                val mappings = getMappings()
+                val pluginId = PluginId.findId("ru.meanmail.plugins.prettify-python")
+                    ?: throw IllegalStateException("Plugin ID not found")
+                val plugin = PluginManagerCore.getPlugin(pluginId)
+                    ?: throw IllegalStateException("Plugin not found")
+
+                val now = LocalDateTime.now()
+                val mappingsData = MappingsData(
+                    mappings = mappings,
+                    ideVersion = ApplicationInfo.getInstance().fullVersion,
+                    pluginVersion = plugin.version,
+                    mappingsCount = mappings.size,
+                    exportDate = now.toString()
+                )
+                val jsonString = json.encodeToString(mappingsData)
+                fileChooser.selectedFile.writeText(jsonString)
+                Messages.showInfoMessage(
+                    mainPanel,
+                    "Mappings exported successfully",
+                    "Export Successful"
+                )
             } catch (e: Exception) {
                 Messages.showErrorDialog(
                     mainPanel,
                     "Failed to export mappings: ${e.message}",
-                    "Export Error"
+                    "Export Failed"
                 )
             }
         }
