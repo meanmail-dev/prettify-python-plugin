@@ -104,3 +104,4 @@ fabric.properties
 .idea/csv-plugin.xml
 token.txt
 .intellijPlatform
+.idea/ruff.xml

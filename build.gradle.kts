@@ -13,7 +13,6 @@ repositories {
 
 plugins {
     java
-// https://plugins.jetbrains.com/docs/intellij/using-kotlin.html#kotlin-standard-library
     alias(libs.plugins.kotlin)
     alias(libs.plugins.intelliJPlatform)
     alias(libs.plugins.kotlinSerialization)
@@ -24,7 +23,6 @@ version = config("version")
 
 dependencies {
     implementation(libs.kotlinxSerialization)
-    implementation(libs.sentry)
     testImplementation(libs.junit)
 
     intellijPlatform {
@@ -38,7 +36,6 @@ dependencies {
             bundledPlugins(platformBundledPlugins)
         }
 
-        instrumentationTools()
         pluginVerifier()
         zipSigner()
         testFramework(TestFrameworkType.Platform)

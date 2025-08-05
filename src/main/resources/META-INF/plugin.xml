@@ -20,6 +20,7 @@
                 instance="dev.meanmail.prettifypython.settings.PrettifySettingsConfigurable"
                 id="dev.meanmail.prettifypython.settings.PrettifySettingsConfigurable"
                 displayName="Prettify Python"/>
+        <errorHandler implementation="com.intellij.diagnostic.JetBrainsMarketplaceErrorReportSubmitter"/>
     </extensions>
 
 </idea-plugin>

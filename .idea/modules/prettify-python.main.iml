@@ -20,12 +20,12 @@
           <arrayArguments>
             <arrayArg name="pluginClasspaths">
               <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-serialization-compiler-plugin-embeddable/1.9.25/96db1ce3e92a6d08e8ca55835b6968ed2531cfac/kotlin-serialization-compiler-plugin-embeddable-1.9.25.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.9.25/68086b208d6c6bca0daaa3ab51861a2d9c75b6c9/kotlin-scripting-jvm-1.9.25.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.9.25/91c60ba89e416e5f856c8434ef8cf4f94a7fa5f5/kotlin-scripting-common-1.9.25.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.25/f700a2f2b8f0d6d0fde48f56d894dc722fb029d7/kotlin-stdlib-1.9.25.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.9.25/43cdc99e4582c67c2b60f609d0e4c015d33a8e89/kotlin-script-runtime-1.9.25.jar</arg>
-                <arg>$KOTLIN_BUNDLED$/lib/kotlinx-serialization-compiler-plugin.jar</arg>
               </args>
             </arrayArg>
             <arrayArg name="pluginOptions" />
@@ -88,7 +88,7 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:tanvd.grazi:243.21565.199+968" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:training:243.21565.199+600" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:org.jetbrains.plugins.terminal:243.21565.199+348" level="project" />
@@ -126,7 +126,7 @@
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.libraries.ktor.client:243.21565.199+322" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.libraries.ktor.client.cio:243.21565.199+322" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:2.0.20" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.9.22" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
       <library name="Gradle: bundledPlugin:org.jetbrains.plugins.yaml:243.21565.199+207">
         <CLASSES>
@@ -154,7 +154,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.ide.newUiOnboarding:243.21565.199+322" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.jetbrains.sh:243.21565.199+627" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.intellij.platform.images:243.21565.199+538" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.6.3" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledPlugin:com.jetbrains.performancePlugin:243.21565.199+680" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: bundledModule:intellij.platform.collaborationTools:243.21565.199+322" level="project" />
