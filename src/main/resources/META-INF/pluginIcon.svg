@@ -1,7 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="40px" version="1.1" width="40px"
-     style="overflow: hidden; ">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <!-- Background circle -->
+    <circle cx="20" cy="20" r="18" fill="#4584b6"/>
 
-    <text x="21" y="23" fill="black" text-anchor="middle" alignment-baseline="central">P ≠ y
-    </text>
+
+    <!-- Mathematical symbols in isosceles triangle -->
+    <g fill="#ffde57" font-family="Arial, sans-serif" font-weight="bold">
+        <text x="20" y="14" font-size="8" text-anchor="middle">≥</text>
+        <text x="12" y="28" font-size="8" text-anchor="middle">≠</text>
+        <text x="28" y="28" font-size="8" text-anchor="middle">λ</text>
+    </g>
 
 </svg>
