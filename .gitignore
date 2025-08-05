@@ -105,3 +105,4 @@ fabric.properties
 token.txt
 .intellijPlatform
 .idea/ruff.xml
+.kotlin
