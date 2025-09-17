@@ -1,3 +1,19 @@
+## 2025.2 (September 05, 2025)
+
+* Update dependencies
+
+## 2025.1 (August 05, 2025)
+
+* Remove the Sentry integration
+* Update dependencies
+* Update the Plugin icon
+
+## 2025.1 (August 05, 2025)
+
+* Remove the Sentry integration
+* Update dependencies
+* Update the Plugin icon
+
 ## 2024.1 (December 17, 2024)
 
 * Added settings panel for symbol mappings
