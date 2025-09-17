@@ -11,8 +11,6 @@
     <depends optional="true" config-file="python-config.xml">com.intellij.modules.python</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <lang.foldingBuilder language="Python"
-                             implementationClass="dev.meanmail.prettifypython.PrettifyFoldingBuilder"/>
         <applicationService
                 serviceImplementation="dev.meanmail.prettifypython.settings.PrettifySettings"/>
         <applicationConfigurable
