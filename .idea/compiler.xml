@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17">
+      <module name="prettify-python.main" target="21" />
+      <module name="prettify-python.test" target="21" />
       <module name="ru.meanmail.prettify-python.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
