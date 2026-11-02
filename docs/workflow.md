@@ -24,11 +24,10 @@ The globally installed `develop-intellij-plugin` skill defines the development p
 - Local-diagnostic focused test: `./gradlew test --tests "dev.meanmail.prettifypython.settings.PrettifySettingsComponentTest"`.
 - Local-required: `git diff --check`, changed XML parsing, official wrapper distribution/JAR checksum checks.
 - Local-required native package: `./gradlew buildPlugin` when CI has no retained distribution.
-  `./gradlew buildPlugin -PnativePlatformPath=/absolute/path/to/a/compatible/PyCharm-SDK` may reuse an
-  existing SDK for this package. The override accepts only dependency resolution and native package
-  preparation tasks; it rejects tests and verification. CI leaves it unset and owns the exact default
-  SDK gate. Record the actual native SDK and package hash; a native artifact built with another SDK
-  is not the CI binary. Prefer the same SDK; the reused 2025.2.6 SDK remains compatible with Kotlin 2.0.21.
+  Use the configured PyCharm 2025.1.6.2 SDK and JDK 21; newer SDKs can require a newer Kotlin compiler.
+  Record the native package hash. A locally built artifact is not the CI binary.
+  With a previously running Kotlin daemon on JDK 25, use JDK 21 and
+  `-Pkotlin.compiler.execution.strategy=in-process` for package preparation.
 - The verifier explicitly covers the IDE 243 floor (PC 2024.3.6.1) in addition to recommended current IDEs.
 - Separate lint/typecheck commands and generated sources: Not configured.
 - Never run `gradlew clean` without the owner's permission.

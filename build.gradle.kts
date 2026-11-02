@@ -28,16 +28,8 @@ dependencies {
     testImplementation(libs.junit)
 
     intellijPlatform {
-        val nativePlatform = providers.gradleProperty("nativePlatformPath")
-        if (nativePlatform.isPresent) {
-            require(gradle.startParameter.taskNames.isNotEmpty() && gradle.startParameter.taskNames.all {
-                it.substringAfterLast(':') in setOf("dependencies", "buildPlugin", "prepareSandbox")
-            }) { "nativePlatformPath is only for native package preparation" }
-            local(nativePlatform)
-        } else {
-            create(config("platformType"), config("platformVersion")) {
-                useInstaller = false
-            }
+        create(config("platformType"), config("platformVersion")) {
+            useInstaller = false
         }
         jetbrainsRuntime()
         val plugins = providers.gradleProperty("plugins").map { it.split(',') }
