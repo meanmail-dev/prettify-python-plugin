@@ -1,5 +1,6 @@
 ## 2026.0 (Unreleased)
 
+* JSON exports retain the plugin version on newer IDEs without using obsolete plugin lookup APIs.
 * Source builds use updated build tooling and the latest PyCharm 2025.1 maintenance SDK, including upstream security fixes. Installed IDEs must still receive their own JetBrains updates.
 
 ## 2025.2 (September 05, 2025)

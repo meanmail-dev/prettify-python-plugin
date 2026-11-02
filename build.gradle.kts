@@ -123,6 +123,13 @@ tasks {
         gradleVersion = config("gradleVersion")
     }
 
+    processResources {
+        inputs.property("pluginVersion", project.version)
+        filesMatching("prettify-python-version.txt") {
+            expand("pluginVersion" to project.version)
+        }
+    }
+
     test {
         useJUnit()
         systemProperty("java.awt.headless", "false")
