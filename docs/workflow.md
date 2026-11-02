@@ -34,7 +34,8 @@ The globally installed `develop-intellij-plugin` skill defines the development p
 
 ## Native Remote Development
 
-- Owner: Local-required through the installed `~/MyProjects/ide-test-mcp/bin/ide-test-mcp`.
+- Owner: Local-required through the shared `ide-test-mcp` installation. A reviewed isolated installation
+  of the same implementation can qualify a required adapter while preserving a dirty local checkout.
 - Runtime: unmodified IDEA 2025.3.6, build 253.33813.25, bundled JBR 21, macOS arm64;
   the controller itself uses the installed JDK 25 and its matching 253 Driver/agent.
 - Official PythonCore 253.33813.55 belongs on the backend; Python for JetBrains Client
@@ -47,6 +48,10 @@ The globally installed `develop-intellij-plugin` skill defines the development p
   Prettify Python page through its search field. Use `tree_activate` for category double-clicks; individual
   mappings can be selected and opened with the actual Edit toolbar button. The runner's `open_dialog`
   tree selector sends one click. Confirm applied values in the owned settings XML as well as the UI.
+- These Swing tree controls belong to the monolithic UI. The 253 split frontend mirrors the page through
+  a Lux panel: use an observed `lux_render` image and its fresh one-use token for `lux_click`, and the
+  Lux `open_dialog` selector for Edit Mapping. Verify the visible remote dialog and cancellation;
+  backend semantic clicks alone do not establish frontend pointer forwarding.
 - Compare the absent-product ordinary-editor control. Warm up for 60 seconds and sample each JVM for
   30 seconds; CPU below 20% of one core, backend/monolith RSS below 4 GiB, frontend below 2 GiB.
 - Require at least 4 GiB free before package preparation/launch. Retain package hashes, scoped logs,
