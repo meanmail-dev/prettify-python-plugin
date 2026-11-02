@@ -21,4 +21,4 @@ jobs:
           distribution: corretto
           java-version: 21
       - name: Test, build and verify compatibility
-        run: ./gradlew test build buildPlugin verifyPlugin
+        run: xvfb-run -a ./gradlew test build buildPlugin verifyPlugin

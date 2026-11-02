@@ -15,9 +15,10 @@ The globally installed `develop-intellij-plugin` skill defines the development p
 
 ## Verification
 
-- CI-required: `./gradlew test build buildPlugin verifyPlugin` on GitHub-hosted Ubuntu 24.04,
+- CI-required: `xvfb-run -a ./gradlew test build buildPlugin verifyPlugin` on GitHub-hosted Ubuntu 24.04,
   using JDK 21. Gradle resolves dependencies before executing the gate. This repository is public;
   the organization's private runners intentionally do not accept public repositories.
+  Swing settings tests use a virtual display; the test JVM explicitly disables headless mode.
 - CI-required: Gradle Wrapper validation in `gradle-wrapper-validation.yml`.
 - Local-diagnostic dependency resolution: `./gradlew dependencies` before a focused local Gradle check.
 - Local-diagnostic focused test: `./gradlew test --tests "dev.meanmail.prettifypython.settings.PrettifySettingsComponentTest"`.

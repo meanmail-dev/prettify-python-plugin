@@ -125,6 +125,7 @@ tasks {
 
     test {
         useJUnit()
+        systemProperty("java.awt.headless", "false")
 
         maxHeapSize = "1G"
     }
