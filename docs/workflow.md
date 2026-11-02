@@ -43,6 +43,10 @@ The globally installed `develop-intellij-plugin` skill defines the development p
 - Fixture: a synthetic Python file with foldable operators and a separate ordinary text file.
   Verify native settings category editing, individual mapping editing/cancellation, mapping persistence,
   useful folding, repeat use, exact source Save/Undo/Redo, close/reopen and same-client reconnect.
+- On macOS IDE 253, open the native Settings menu entry and observe the `Settings` dialog. Locate the
+  Prettify Python page through its search field. Use `tree_activate` for category double-clicks; individual
+  mappings can be selected and opened with the actual Edit toolbar button. The runner's `open_dialog`
+  tree selector sends one click. Confirm applied values in the owned settings XML as well as the UI.
 - Compare the absent-product ordinary-editor control. Warm up for 60 seconds and sample each JVM for
   30 seconds; CPU below 20% of one core, backend/monolith RSS below 4 GiB, frontend below 2 GiB.
 - Require at least 4 GiB free before package preparation/launch. Retain package hashes, scoped logs,

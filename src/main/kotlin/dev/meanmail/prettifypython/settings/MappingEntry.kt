@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MappingEntry(
-    val from: String = "",
-    val to: String = "",
-    val category: String = ""
+    var from: String = "",
+    var to: String = "",
+    var category: String = ""
 )
