@@ -1,5 +1,7 @@
 # Prettify Python Plugin
 
+The source branch prepares 2026.0; Marketplace currently provides 2025.2. IDE 2024.3 and later remain supported.
+
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/r/stars/12017?label=JetBrans%20Marketplace)](https://plugins.jetbrains.com/plugin/12017)
 [![JetBrains IntelliJ plugins](https://img.shields.io/jetbrains/plugin/d/12017)](https://plugins.jetbrains.com/plugin/12017)
 [![Twitter Follow](https://img.shields.io/twitter/follow/meanmaildev?style=plastic)](https://twitter.com/meanmaildev)

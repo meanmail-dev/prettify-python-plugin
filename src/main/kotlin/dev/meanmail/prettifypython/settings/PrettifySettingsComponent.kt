@@ -1,12 +1,10 @@
 package dev.meanmail.prettifypython.settings
 
 import com.intellij.icons.AllIcons
-import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.openapi.actionSystem.ActionToolbarPosition
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.application.ApplicationInfo
-import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.Messages
@@ -95,7 +93,7 @@ class PrettifySettingsComponent {
     }
 
     private fun editMapping(node: DefaultMutableTreeNode) {
-        val mapping = node.userObject as MappingEntry
+        val mapping = node.userObject as? MappingEntry ?: return
         val existingCategories = getAllCategories()
         val dialog = MappingDialog(mainPanel, "Edit Mapping", mapping, existingCategories)
         if (dialog.showAndGet()) {
@@ -266,16 +264,15 @@ class PrettifySettingsComponent {
         if (fileChooser.showSaveDialog(mainPanel) == JFileChooser.APPROVE_OPTION) {
             try {
                 val mappings = getMappings()
-                val pluginId = PluginId.findId("ru.meanmail.plugins.prettify-python")
-                    ?: throw IllegalStateException("Plugin ID not found")
-                val plugin = PluginManagerCore.getPlugin(pluginId)
-                    ?: throw IllegalStateException("Plugin not found")
+                val pluginVersion = requireNotNull(
+                    javaClass.getResourceAsStream("/prettify-python-version.txt")
+                ) { "Plugin version resource not found" }.bufferedReader().use { it.readText().trim() }
 
                 val now = LocalDateTime.now(ZoneOffset.UTC)
                 val mappingsData = MappingsData(
                     mappings = mappings,
                     ideVersion = ApplicationInfo.getInstance().fullVersion,
-                    pluginVersion = plugin.version,
+                    pluginVersion = pluginVersion,
                     mappingsCount = mappings.size,
                     exportDate = now.toString()
                 )

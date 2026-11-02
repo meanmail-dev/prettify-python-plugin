@@ -9,6 +9,7 @@ repositories {
 
     intellijPlatform {
         defaultRepositories()
+        jetbrainsRuntime()
     }
 }
 
@@ -27,7 +28,10 @@ dependencies {
     testImplementation(libs.junit)
 
     intellijPlatform {
-        create(config("platformType"), config("platformVersion"))
+        create(config("platformType"), config("platformVersion")) {
+            useInstaller = false
+        }
+        jetbrainsRuntime()
         val plugins = providers.gradleProperty("plugins").map { it.split(',') }
         if (plugins.isPresent && plugins.get().isNotEmpty()) {
             plugins(plugins)
@@ -57,6 +61,9 @@ intellijPlatform {
     buildSearchableOptions = false
 
     pluginVerification.ides {
+        create("PC", "2024.3.6.1") {
+            useInstaller = false
+        }
         recommended()
     }
 
@@ -119,8 +126,18 @@ tasks {
         gradleVersion = config("gradleVersion")
     }
 
+    processResources {
+        val resourcePluginVersion = project.version.toString()
+        inputs.property("pluginVersion", resourcePluginVersion)
+        filesMatching("prettify-python-version.txt") {
+            expand("pluginVersion" to resourcePluginVersion)
+        }
+    }
+
     test {
         useJUnit()
+        systemProperty("java.awt.headless", "false")
+        testLogging.exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
         maxHeapSize = "1G"
     }
