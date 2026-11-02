@@ -1,3 +1,7 @@
+## 2026.0 (Unreleased)
+
+* Source builds use updated build tooling and the latest PyCharm 2025.1 maintenance SDK, including upstream security fixes. Installed IDEs must still receive their own JetBrains updates.
+
 ## 2025.2 (September 05, 2025)
 
 * Update dependencies
