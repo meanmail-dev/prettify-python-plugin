@@ -135,9 +135,10 @@ tasks {
     }
 
     processResources {
-        inputs.property("pluginVersion", project.version)
+        val resourcePluginVersion = project.version.toString()
+        inputs.property("pluginVersion", resourcePluginVersion)
         filesMatching("prettify-python-version.txt") {
-            expand("pluginVersion" to project.version)
+            expand("pluginVersion" to resourcePluginVersion)
         }
     }
 
