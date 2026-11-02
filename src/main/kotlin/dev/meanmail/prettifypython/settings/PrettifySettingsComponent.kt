@@ -93,7 +93,7 @@ class PrettifySettingsComponent {
     }
 
     private fun editMapping(node: DefaultMutableTreeNode) {
-        val mapping = node.userObject as MappingEntry
+        val mapping = node.userObject as? MappingEntry ?: return
         val existingCategories = getAllCategories()
         val dialog = MappingDialog(mainPanel, "Edit Mapping", mapping, existingCategories)
         if (dialog.showAndGet()) {
