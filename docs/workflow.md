@@ -1,0 +1,53 @@
+# Workflow configuration
+
+The globally installed `develop-intellij-plugin` skill defines the development process.
+
+## Project
+
+- Prettify Python, a Free Python symbol-folding plugin with configurable mappings.
+- Repository: `meanmail-dev/prettify-python-plugin`; authoritative ref: `origin/master`.
+- Release authority: `https://plugins.jetbrains.com/plugins/list?pluginId=ru.meanmail.plugins.prettify-python`.
+- Product history and notes: `CHANGES.md`; descriptions: `README.md` and `description.html`.
+- Version syntax: year.minor; next major after published `2025.2` is `2026.0`.
+  Update `gradle.properties` and add a top unreleased `CHANGES.md` section for a behavior change.
+  No paid product descriptor or release date field is configured.
+- External portfolio registration: Not configured. Local task queue and roadmap: Not configured.
+
+## Verification
+
+- CI-required: `./gradlew test build buildPlugin verifyPlugin` on the existing Railway IntelliJ runner,
+  using JDK 21. Gradle resolves dependencies before executing the gate.
+- CI-required: Gradle Wrapper validation in `gradle-wrapper-validation.yml`.
+- Local-diagnostic dependency resolution: `./gradlew dependencies` before a focused local Gradle check.
+- Local-diagnostic focused test: `./gradlew test --tests "dev.meanmail.prettifypython.settings.PrettifySettingsComponentTest"`.
+- Local-required: `git diff --check`, changed XML parsing, official wrapper distribution/JAR checksum checks.
+- Local-required native package: `./gradlew buildPlugin` when CI has no retained distribution.
+- Separate lint/typecheck commands and generated sources: Not configured.
+- Never run `gradlew clean` without the owner's permission.
+
+## Native Remote Development
+
+- Owner: Local-required through the installed `~/MyProjects/ide-test-mcp/bin/ide-test-mcp`.
+- Runtime: unmodified IDEA 2025.3.6, build 253.33813.25, bundled JBR 21, macOS arm64;
+  the controller itself uses the installed JDK 25 and its matching 253 Driver/agent.
+- Official PythonCore 253.33813.55 belongs on the backend; Python for JetBrains Client
+  253.30387.20 (`com.intellij.python.frontend`) belongs on the frontend.
+- Product placement: backend. Use isolated localhost monolith/split fixtures with 1024 MiB heaps.
+- Fixture: a synthetic Python file with foldable operators and a separate ordinary text file.
+  Verify native settings category editing, individual mapping editing/cancellation, mapping persistence,
+  useful folding, repeat use, exact source Save/Undo/Redo, close/reopen and same-client reconnect.
+- Compare the absent-product ordinary-editor control. Warm up for 60 seconds and sample each JVM for
+  30 seconds; CPU below 20% of one core, backend/monolith RSS below 4 GiB, frontend below 2 GiB.
+- Require at least 4 GiB free before package preparation/launch. Retain package hashes, scoped logs,
+  native operation results and resource observations in the private task evidence.
+
+## Publication and invariants
+
+- Candidate branches may be pushed for approved work. Publish reviewed exact-head-green changes through a PR
+  into `master`, assigned to the owner. A merge runs the same verification as its PR; these workflows contain
+  no signing, publication, release, deployment or artifact upload lane. Inspect the actual workflows before
+  reusing tree-equivalent candidate evidence. Marketplace publication always needs separate approval.
+- Preserve the IDE 2024.3 floor, JVM 21, optional Python integration, Free mappings, JSON compatibility,
+  folding semantics and source bytes. Use `ApplicationManager` scheduling for IDE thread transitions.
+- Repository-specific verification improvements belong here and in the existing workflows/tests, using the
+  same reviewed publication path. Shared-process improvements belong to the globally installed skill source.
