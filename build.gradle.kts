@@ -137,6 +137,7 @@ tasks {
     test {
         useJUnit()
         systemProperty("java.awt.headless", "false")
+        testLogging.exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
         maxHeapSize = "1G"
     }
