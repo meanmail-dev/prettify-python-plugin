@@ -9,6 +9,7 @@ repositories {
 
     intellijPlatform {
         defaultRepositories()
+        jetbrainsRuntime()
     }
 }
 
@@ -27,7 +28,10 @@ dependencies {
     testImplementation(libs.junit)
 
     intellijPlatform {
-        create(config("platformType"), config("platformVersion"))
+        create(config("platformType"), config("platformVersion")) {
+            useInstaller = false
+        }
+        jetbrainsRuntime()
         val plugins = providers.gradleProperty("plugins").map { it.split(',') }
         if (plugins.isPresent && plugins.get().isNotEmpty()) {
             plugins(plugins)

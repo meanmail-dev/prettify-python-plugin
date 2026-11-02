@@ -22,6 +22,10 @@ Newer Kotlin and serialization release lines are excluded from this bounded main
 the plugin retains its IDE 2024.3 floor. No new paid feature, user-project dependency or JSON migration
 is introduced. The build-only security fixes do not repair vulnerabilities in a user's installed IDE.
 
+The 2025.1.6.2 Community SDK is resolved from the official multi-OS Maven archive with its matching JBR.
+The installer resolver could not select this four-component maintenance version even though its official
+download and Maven artifact exist. This changes artifact resolution, not the platform version or IDE floor.
+
 Sources: [Gradle 9.8.2 notes](https://docs.gradle.org/9.8.2/release-notes.html),
 [Gradle 9 migration guide](https://docs.gradle.org/current/userguide/upgrading_version_9.html),
 [IntelliJ Gradle release history](https://github.com/JetBrains/intellij-platform-gradle-plugin/releases),
