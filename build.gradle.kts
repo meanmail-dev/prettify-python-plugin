@@ -28,8 +28,16 @@ dependencies {
     testImplementation(libs.junit)
 
     intellijPlatform {
-        create(config("platformType"), config("platformVersion")) {
-            useInstaller = false
+        val nativePlatform = providers.gradleProperty("nativePlatformPath")
+        if (nativePlatform.isPresent) {
+            require(gradle.startParameter.taskNames.isNotEmpty() && gradle.startParameter.taskNames.all {
+                it.substringAfterLast(':') in setOf("dependencies", "buildPlugin", "prepareSandbox")
+            }) { "nativePlatformPath is only for native package preparation" }
+            local(nativePlatform)
+        } else {
+            create(config("platformType"), config("platformVersion")) {
+                useInstaller = false
+            }
         }
         jetbrainsRuntime()
         val plugins = providers.gradleProperty("plugins").map { it.split(',') }
@@ -61,6 +69,9 @@ intellijPlatform {
     buildSearchableOptions = false
 
     pluginVerification.ides {
+        create("PC", "2024.3.6.1") {
+            useInstaller = false
+        }
         recommended()
     }
 

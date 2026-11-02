@@ -14,6 +14,10 @@ class PrettifySettingsComponentTest : BasePlatformTestCase() {
 
     private fun assertNonMappingEditIsIgnored(label: String) {
         val component = PrettifySettingsComponent()
+        component.setMappings(listOf(
+            MappingEntry("**", "^", "Mathematical operators"),
+            MappingEntry("!=", "≠", "Comparison operators"),
+        ))
         val mappings = component.getMappings()
         val method = PrettifySettingsComponent::class.java
             .getDeclaredMethod("editMapping", DefaultMutableTreeNode::class.java)
