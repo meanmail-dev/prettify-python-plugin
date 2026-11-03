@@ -18,6 +18,8 @@ The globally installed `develop-intellij-plugin` skill defines the development p
 - CI-required: `xvfb-run -a ./gradlew test build buildPlugin verifyPlugin` on GitHub-hosted Ubuntu 24.04,
   using JDK 21. Gradle resolves dependencies before executing the gate. This repository is public;
   the organization's private runners intentionally do not accept public repositories.
+  The disposable hosted runner removes unused Android and .NET installations before Java setup
+  to leave room for the development SDK and compatibility verifier distributions.
   Swing settings tests use a virtual display; the test JVM explicitly disables headless mode.
 - CI-required: Gradle Wrapper validation in `gradle-wrapper-validation.yml`.
 - Local-diagnostic dependency resolution: `./gradlew dependencies` before a focused local Gradle check.
