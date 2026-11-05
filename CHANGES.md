@@ -1,4 +1,4 @@
-## 2026.0 (Unreleased)
+## 2026.0 (November 3, 2026)
 
 * Double-clicking a mapping category leaves its mappings unchanged instead of crashing the settings page.
 * Custom mapping values and categories survive saving and loading IDE settings.
